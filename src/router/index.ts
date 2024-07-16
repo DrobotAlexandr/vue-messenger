@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "chat" */ '../views/LoginView/LoginView.vue')
+        component: () => import(/* webpackChunkName: "login" */ '../views/LoginView/LoginView.vue')
     }
 ]
 
