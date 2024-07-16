@@ -5,15 +5,14 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         name: 'main',
         component: () => import(/* webpackChunkName: "main" */ '../views/MainView/MainView.vue'),
-        alias: '/m/'
     },
     {
-        path: '/m/:chatId',
+        path: '/chat/:chatId',
         name: 'chat',
         component: () => import(/* webpackChunkName: "chat" */ '../views/ChatView/ChatView.vue')
     },
     {
-        path: '/m/login',
+        path: '/login',
         name: 'login',
         component: () => import(/* webpackChunkName: "chat" */ '../views/LoginView/LoginView.vue')
     }
