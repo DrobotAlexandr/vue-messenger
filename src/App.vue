@@ -1,13 +1,10 @@
 <template>
-  <div class="messenger">
-    <div class="messenger__sidebar">
-      <sidebar-section></sidebar-section>
-    </div>
-    <div class="messenger__view">
-      <router-view/>
-    </div>
+  <div class="App">
+    <login-layout v-if="$route.name==='login'"></login-layout>
+    <messenger-layout v-if="$route.name!=='login'"></messenger-layout>
   </div>
 </template>
 <script setup lang="ts">
-import SidebarSection from "@/components/SidebarSection/SidebarSection.vue";
+import MessengerLayout from "@/layouts/MessengerLayout/MessengerLayout.vue";
+import LoginLayout from "@/layouts/LoginLayout/LoginLayout.vue";
 </script>

@@ -1,0 +1,9 @@
+body {
+    background-color: #ecebff99;
+    height: 100vh;
+}
+
+.messenger {
+    display: grid;
+    grid-template-columns: 400px auto;
+}
