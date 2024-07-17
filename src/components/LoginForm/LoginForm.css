@@ -1,0 +1,51 @@
+.LoginForm {
+    max-width: 588px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.LoginForm__title {
+    text-align: center;
+}
+
+.LoginForm__sub-title {
+    text-align: center;
+}
+
+.LoginForm__item {
+    display: block;
+    margin-bottom: 16px;
+}
+
+.LoginForm__item-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.LoginForm__item-buttons-left {
+    text-align: left;
+}
+
+.LoginForm__item-buttons-right {
+    text-align: right;
+}
+
+.LoginForm__item-confirm-title {
+    display: block;
+    margin-bottom: 47px;
+}
+
+.LoginForm__item-confirm-controls {
+    display: grid;
+    grid-template-columns: 40px auto;
+    margin-bottom: 51px;
+}
+
+.LoginForm__item-confirm-controls-input {
+    width: 16px;
+}
+
+.LoginForm__item_big-margin {
+    margin-bottom: 45px;
+    display: block;
+}
