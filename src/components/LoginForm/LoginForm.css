@@ -1,3 +1,7 @@
+body {
+    background-color: #ffffff;
+}
+
 .LoginForm {
     max-width: 588px;
     margin: 0 auto;
@@ -6,10 +10,19 @@
 
 .LoginForm__title {
     text-align: center;
+    color: var(--theme-color);
+    font-size: 36px;
+    font-family: var(--font-title);
+    cursor: default;
 }
 
 .LoginForm__sub-title {
     text-align: center;
+    color: #555;
+    font-size: 18px;
+    font-family: var(--font-title);
+    margin-bottom: 51px;
+    cursor: default;
 }
 
 .LoginForm__item {
@@ -33,12 +46,16 @@
 .LoginForm__item-confirm-title {
     display: block;
     margin-bottom: 47px;
+    color: #606060;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .LoginForm__item-confirm-controls {
     display: grid;
     grid-template-columns: 40px auto;
     margin-bottom: 51px;
+    cursor: pointer;
 }
 
 .LoginForm__item-confirm-controls-input {
@@ -48,4 +65,22 @@
 .LoginForm__item_big-margin {
     margin-bottom: 45px;
     display: block;
+}
+
+.LoginForm__item-title {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.LoginForm__item-confirm-controls-input-text {
+    padding: 8px;
+    font-size: 14px;
+}
+
+.LoginForm__item-confirm-controls span {
+    font-size: 14px;
+    color: #606060;
 }

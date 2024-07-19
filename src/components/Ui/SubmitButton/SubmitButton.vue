@@ -1,6 +1,6 @@
 <template>
   <div class="SubmitButton">
-    <button class="btn btn-primary">
+    <button :class="'btn btn-primary button-'+templateClass">
       <slot></slot>
     </button>
   </div>
@@ -12,6 +12,17 @@ import '@/components/Ui/SubmitButton/SubmitButton.css';
 
 export default defineComponent({
   name: 'SubmitButton',
+  props: ['template'],
   components: {},
+  data: function () {
+    return {
+      templateClass: 'default'
+    }
+  },
+  created: function () {
+    if (this.template) {
+      this.templateClass = this.template;
+    }
+  }
 });
 </script>

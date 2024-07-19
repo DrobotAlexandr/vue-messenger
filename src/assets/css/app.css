@@ -1,9 +1,64 @@
+:root {
+    /* Fonts */
+
+    --font-default: "Open Sans", sans-serif;
+    --font-title: "Playfair Display";
+
+    /* Colors */
+
+    --theme-color: #5D5FEF;
+
+    /* Bootstrap */
+    --bs-border-radius: 8px;
+    --bs-link-color-rgb: #5D5FEF;
+    --bs-link-hover-color-rgb: #5D5FEF;
+
+}
+
 body {
     background-color: #ecebff99;
     height: 100vh;
+    font-family: var(--font-default);
 }
 
 .messenger {
     display: grid;
     grid-template-columns: 400px auto;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgb(93 95 239 / 19%);
+}
+
+select.form-control {
+    cursor: pointer;
+}
+
+
+.form-check-input:checked {
+    background-color: var(--theme-color);
+    border-color: var(--theme-color);
+}
+
+.form-check {
+    cursor: pointer;
+}
+
+.form-check-label {
+    cursor: pointer;
+}
+
+.btn.btn-primary {
+    background-color: var(--theme-color) !important;
+    border: 1px solid var(--theme-color) !important;
+    padding: 8px;
+    min-width: 200px;
+    height: 56px;
+    font-weight: bold !important;
+    font-size: 14px;
+}
+
+.btn.btn-primary.button-lite {
+    background-color: transparent !important;
+    color: var(--theme-color) !important;
 }

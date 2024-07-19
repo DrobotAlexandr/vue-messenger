@@ -11,7 +11,8 @@
         Имя/Никнейм
       </span>
       <span class="LoginForm__item-content">
-        <input class="form-control" type="text" placeholder="Введите имя/никнейм">
+        <input class="form-control LoginForm__item-confirm-controls-input-text" type="text"
+               placeholder="Введите имя/никнейм">
       </span>
     </label>
     <label class="LoginForm__item">
@@ -19,20 +20,21 @@
         Укажите ваш возраст
       </span>
       <span class="LoginForm__item-content">
-        <input class="form-control" type="text" placeholder="Введите имя/никнейм">
+        <input style="max-width: 70px; text-align: center;"
+               class="form-control LoginForm__item-confirm-controls-input-text" type="number" placeholder="19">
       </span>
     </label>
     <label class="LoginForm__item LoginForm__item_big-margin">
       <span class="LoginForm__item-content">
         <span class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
+          <input class="form-check-input" type="radio" name="gender" id="man" checked>
+          <label class="form-check-label" for="man">
             Я мужчина
           </label>
         </span>
         <span class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-          <label class="form-check-label" for="flexRadioDefault2">
+          <input class="form-check-input" type="radio" name="gender" id="woman">
+          <label class="form-check-label" for="woman">
            Я женщина
           </label>
         </span>
@@ -43,7 +45,7 @@
         Выберите категорию проблемы, которая вас беспокоит
       </span>
       <span class="LoginForm__item-content">
-        <select class="form-control">
+        <select class="form-control LoginForm__item-confirm-controls-input-text">
           <option>Депрессия</option>
           <option>Тревога и стресс</option>
           <option>Самооценка и уверенность</option>
@@ -63,10 +65,10 @@
     </label>
     <div class="LoginForm__item-buttons">
       <div class="LoginForm__item-buttons-left">
-        <submit-button>Отмена</submit-button>
+        <SubmitButton template="lite">Отмена</SubmitButton>
       </div>
       <div class="LoginForm__item-buttons-right">
-        <submit-button>НАЧАТЬ ЧАТ</submit-button>
+        <SubmitButton>НАЧАТЬ ЧАТ</SubmitButton>
       </div>
     </div>
   </form>
