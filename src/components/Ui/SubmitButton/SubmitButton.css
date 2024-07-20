@@ -1,0 +1,5 @@
+.SubmitButton .disable {
+    background: #dee2e6 !important;
+    border: 1px solid #dee2e6 !important;
+    pointer-events: none;
+}

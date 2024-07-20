@@ -1,6 +1,6 @@
 <template>
   <div class="SubmitButton">
-    <button :class="'btn btn-primary button-'+templateClass">
+    <button :class="'btn btn-primary button-'+templateClass+' '+disableClass">
       <slot></slot>
     </button>
   </div>
@@ -10,18 +10,42 @@
 import {defineComponent} from 'vue';
 import '@/components/Ui/SubmitButton/SubmitButton.css';
 
+declare interface ComponentData {
+  templateClass: string,
+  disableClass: string
+}
+
 export default defineComponent({
   name: 'SubmitButton',
-  props: ['template'],
+  props: ['template', 'disable'],
   components: {},
-  data: function () {
+  data: function (): ComponentData {
     return {
-      templateClass: 'default'
+      templateClass: 'default',
+      disableClass: ''
+    }
+  },
+  watch: {
+    disable() {
+      this.setDisabled();
     }
   },
   created: function () {
-    if (this.template) {
-      this.templateClass = this.template;
+    this.setDisabled();
+    this.setTemplate();
+  },
+  methods: {
+    setDisabled() {
+      if (this.disable) {
+        this.disableClass = 'disable';
+      } else {
+        this.disableClass = '';
+      }
+    },
+    setTemplate() {
+      if (this.template) {
+        this.templateClass = this.template;
+      }
     }
   }
 });
