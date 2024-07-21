@@ -3,6 +3,7 @@
     bottom: 48px;
     left: 0;
     width: 100%;
+    padding-left: 30%;
 }
 
 .MessageForm__box {
@@ -46,6 +47,7 @@
     border: none !important;
     outline: none !important;
 }
+
 .MessageForm__box-message-attach .dropdown-toggle::after {
     display: none;
 }
@@ -57,6 +59,7 @@
     display: block;
     margin: 0 auto;
 }
+
 .MessageForm__box-message-attach {
     padding-top: 9px;
 }
