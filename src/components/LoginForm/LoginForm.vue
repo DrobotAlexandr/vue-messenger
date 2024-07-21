@@ -1,5 +1,5 @@
 <template>
-  <form class="LoginForm" @submit.prevent="sendLoginForm">
+  <form class="LoginForm" @submit.prevent="sendLoginForm" v-bind:class="{'loading' : buttonLoading}">
     <div class="LoginForm__title">
       Добро пожаловать
     </div>
@@ -77,12 +77,15 @@
     </label>
     <div class="LoginForm__item-buttons">
       <div class="LoginForm__item-buttons-left">
-        <a href="/">
+        <a v-if="!buttonLoading" href="/">
           <SubmitButton template="lite">Отмена</SubmitButton>
         </a>
+        <span v-else class="LoginForm__item-loading-message">
+         Создаем чат для вас. Ожидайте...
+        </span>
       </div>
       <div class="LoginForm__item-buttons-right">
-        <SubmitButton :disable="disableSendButton">НАЧАТЬ ЧАТ</SubmitButton>
+        <SubmitButton :loading="buttonLoading" :disable="disableSendButton">НАЧАТЬ ЧАТ</SubmitButton>
       </div>
     </div>
   </form>
@@ -101,6 +104,7 @@ interface ProblemCategory {
 
 declare interface ComponentData {
   privatePolicyLink: string,
+  buttonLoading: boolean,
   form: {
     userName: string,
     userAge: number,
@@ -125,6 +129,7 @@ export default defineComponent({
   data(): ComponentData {
     return {
       privatePolicyLink: '/',
+      buttonLoading: false,
       form: {
         userName: '',
         userAge: 0,
@@ -179,7 +184,13 @@ export default defineComponent({
     },
 
     sendLoginForm(): void {
-      console.log(this.form);
+
+      this.buttonLoading = true;
+
+      setTimeout(() => {
+        this.$router.push('/');
+      }, 2000);
+
     }
   }
 });

@@ -1,7 +1,12 @@
 <template>
   <div class="SubmitButton">
     <button :class="'btn btn-primary button-'+templateClass+' '+disableClass">
-      <slot></slot>
+      <span v-if="!loading">
+        <slot></slot>
+      </span>
+      <span v-else class="spinner-border text-primary" role="status">
+        <span class="visually-hidden"></span>
+      </span>
     </button>
   </div>
 </template>
@@ -17,7 +22,11 @@ declare interface ComponentData {
 
 export default defineComponent({
   name: 'SubmitButton',
-  props: ['template', 'disable'],
+  props: {
+    template: String,
+    disable: Boolean,
+    loading: Boolean
+  },
   components: {},
   data: function (): ComponentData {
     return {
@@ -28,6 +37,9 @@ export default defineComponent({
   watch: {
     disable() {
       this.setDisabled();
+    },
+    loading() {
+      this.setLoading();
     }
   },
   created: function () {
@@ -45,6 +57,13 @@ export default defineComponent({
     setTemplate() {
       if (this.template) {
         this.templateClass = this.template;
+      }
+    },
+    setLoading() {
+      if (this.loading) {
+        this.disableClass = 'disable';
+      } else {
+        this.disableClass = '';
       }
     }
   }

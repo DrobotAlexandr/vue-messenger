@@ -84,3 +84,36 @@ body {
     font-size: 14px;
     color: #606060;
 }
+
+.LoginForm.loading .LoginForm__item, .LoginForm.loading .LoginForm__item-confirm {
+    pointer-events: none;
+    filter: blur(1px);
+}
+
+.LoginForm__item-loading-message {
+    font-size: 14px;
+    color: #555;
+    padding-top: 16px;
+    display: block;
+}
+
+/* mobile */
+
+@media screen and (max-width: 768px) {
+    .LoginForm {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .LoginForm__item-buttons-left {
+        display: none;
+    }
+
+    .LoginForm__item-buttons {
+        display: block;
+    }
+
+    .LoginForm__item-buttons-right {
+        text-align: center;
+    }
+}
