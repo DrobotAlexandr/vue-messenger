@@ -62,3 +62,38 @@ select.form-control {
     background-color: transparent !important;
     color: var(--theme-color) !important;
 }
+
+.messenger__view-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    height: 100vh;
+    position: relative;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    background-color: #FFFFFF;
+}
+
+::-webkit-scrollbar-button {
+
+}
+
+::-webkit-scrollbar-track {
+}
+
+::-webkit-scrollbar-track-piece {
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: #5d5fef90;
+}
+
+::-webkit-scrollbar-corner {
+}
+
+::-webkit-resizer {
+}

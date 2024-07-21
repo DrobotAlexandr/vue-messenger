@@ -1,0 +1,62 @@
+.MessageForm {
+    position: absolute;
+    bottom: 48px;
+    left: 0;
+    width: 100%;
+}
+
+.MessageForm__box {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 90px;
+}
+
+.MessageForm__box-message {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 30px;
+    background: #fff;
+    padding: 16px 16px 0 16px;
+    border-radius: 8px;
+}
+
+.MessageForm__box-send-button-btn {
+    background: #fff;
+    padding: 4px;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    float: right;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.MessageForm__box-send-button-btn svg {
+    display: block;
+    width: 23px;
+    height: 23px;
+    margin: 0 auto;
+    transform: rotate(45deg);
+    fill: var(--theme-color);
+}
+
+.MessageForm__box-message-textarea {
+    border: none !important;
+    outline: none !important;
+}
+.MessageForm__box-message-attach .dropdown-toggle::after {
+    display: none;
+}
+
+.MessageForm__box-message-attach svg {
+    fill: var(--theme-color);
+    width: 23px;
+    height: 23px;
+    display: block;
+    margin: 0 auto;
+}
+.MessageForm__box-message-attach {
+    padding-top: 9px;
+}

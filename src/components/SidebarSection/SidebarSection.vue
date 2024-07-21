@@ -11,13 +11,17 @@
             </svg>
           </span>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Выход</a></li>
+            <li>
+              <router-link to="/login" class="dropdown-item">Выход</router-link>
+            </li>
           </ul>
         </div>
       </div>
       <div class="SidebarSection__header-search">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+             viewBox="0 0 16 16">
+          <path
+              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
         </svg>
         <input class="SidebarSection__header-search-input" type="search" placeholder="Поиск"/>
       </div>
@@ -30,7 +34,7 @@
         </div>
       </div>
       <div v-if="messages" class="SidebarSection__chats-items">
-        <router-link v-for="message in messages" v-bind:key="message.id" to="/" class="SidebarSection__chats-item">
+        <router-link v-for="message in messages" v-bind:key="message.id" to="/m/342342" class="SidebarSection__chats-item">
           <div class="SidebarSection__chats-item-img">
             <span>{{ message.user.avatar.letter }}</span>
           </div>
@@ -44,7 +48,7 @@
           </div>
           <div class="SidebarSection__chats-item-helper">
             <div class="SidebarSection__chats-item-helper-read-status">
-              <SidebarSectionIsReadStatus/>
+              <SidebarSectionIsReadStatus :status="message.status.code"/>
             </div>
             <div class="SidebarSection__chats-item-helper-time">
               <span v-html="message.time"></span>
@@ -76,7 +80,10 @@ export default defineComponent({
               letter: 'И'
             }
           },
-          time: '15:04'
+          time: '15:04',
+          status: {
+            code: 'send'
+          }
         },
         {
           id: 2,
@@ -87,7 +94,10 @@ export default defineComponent({
               letter: 'С'
             }
           },
-          time: '11:23'
+          time: '11:23',
+          status: {
+            code: 'read'
+          }
         },
         {
           id: 3,
@@ -98,7 +108,10 @@ export default defineComponent({
               letter: 'М'
             }
           },
-          time: '15:52'
+          time: '15:52',
+          status: {
+            code: 'read'
+          }
         }
       ]
     };

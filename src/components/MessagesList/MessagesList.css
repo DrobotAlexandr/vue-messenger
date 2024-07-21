@@ -1,0 +1,51 @@
+.MessagesList__items {
+    height: calc(100vh - 132px);
+    padding-top: 20px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.MessagesList__item {
+    background: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 8px;
+    max-width: 500px;
+}
+
+.MessagesList__item_left {
+    float: left;
+}
+
+.MessagesList__item_right {
+    float: right;
+    background: #5d5fef2b;
+}
+
+.MessagesList__item-meta-time {
+    font-size: 11px;
+    color: green;
+}
+
+.MessagesList__item-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    padding-left: 8px;
+    width: 60px;
+    float: right;
+}
+
+.MessagesList__item-separator {
+    clear: both;
+}
+
+span.MessagesList__item-meta-status {
+    margin-bottom: -3px;
+}
+
+.MessagesList__item-message img {
+    width: 100%;
+    max-height: 400px;
+}

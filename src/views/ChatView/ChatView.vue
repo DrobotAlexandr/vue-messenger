@@ -1,15 +1,16 @@
 <template>
   <div class="ChatView">
-    ChatView
+    <MessagesList/>
   </div>
 </template>
 
 <script lang="ts">
 import {defineComponent} from 'vue';
+import MessagesList from "@/components/MessagesList/MessagesList.vue";
 
 
 export default defineComponent({
   name: 'ChatView',
-  components: {},
+  components: {MessagesList},
 });
 </script>
