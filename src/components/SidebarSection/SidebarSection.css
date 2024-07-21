@@ -2,3 +2,122 @@
     background-color: #fff;
     height: 100vh;
 }
+
+.SidebarSection__header {
+    display: grid;
+    grid-template-columns: 55px auto;
+    padding: 8px 20px 0 20px;
+}
+
+.SidebarSection__chats-filter {
+    padding: 4px 20px 4px 20px;
+    box-shadow: 0 2px 2px rgb(114, 114, 114, 0.169);
+}
+
+.SidebarSection__chats-filter-item {
+    border-bottom: 2px solid transparent;
+    display: inline;
+    padding: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.SidebarSection__chats-filter-item--active {
+    border-bottom: 2px solid var(--theme-color);
+    cursor: default;
+    pointer-events: none;
+    color: var(--theme-color);
+}
+
+.SidebarSection__chats-item {
+    display: grid;
+    grid-template-columns: 60px auto 30px;
+    text-decoration: none;
+    position: relative;
+    transform: 0.4s;
+    padding: 10px;
+    border-radius: 0.75rem;
+}
+
+.SidebarSection__chats-item:hover {
+    background: rgb(244, 244, 245);
+}
+
+.SidebarSection__header-menu {
+    padding-top: 2px;
+}
+
+.SidebarSection__chats-item-img {
+    width: 50px;
+    height: 50px;
+    background-color: var(--theme-color);
+    color: #fff;
+    border-radius: 50%;
+    display: grid;
+    align-items: center;
+    text-align: center;
+}
+
+.SidebarSection__chats-item-context-message {
+    font-size: 14px;
+    color: rgb(112, 117, 121);
+}
+
+.SidebarSection__chats-item-context-title {
+    font-weight: bold;
+}
+
+.SidebarSection__chats-item-helper-time {
+    position: absolute;
+    font-size: 11px;
+    top: 12px;
+    color: rgb(112, 117, 121);
+}
+
+.SidebarSection__chats-item-helper-read-status {
+    position: absolute;
+    top: 6px;
+    margin-left: -16px;
+}
+
+.SidebarSection__chats-items {
+    padding: 11px;
+}
+
+.SidebarSection__header-menu .dropdown-toggle {
+    cursor: pointer;
+    padding: 4px;
+}
+
+.SidebarSection__header-menu .dropdown-toggle::after {
+    display: none;
+}
+
+.SidebarSection__header-menu svg {
+    width: 30px;
+    height: 30px;
+}
+
+.SidebarSection__header-search {
+    position: relative;
+}
+
+.SidebarSection__header-search svg {
+    position: absolute;
+    top: 13px;
+    left: 18px;
+    fill: #b2b2b2;
+}
+
+.SidebarSection__header-search-input {
+    border-radius: 1.375rem;
+    border: none !important;
+    outline: none !important;
+    background-color: rgb(244 244 245) !important;
+    padding: 8px 8px 8px 40px;
+    width: 100%;
+}
+
+.SidebarSection__header-search-input:focus {
+    outline: 2px solid var(--theme-color) !important;
+}
