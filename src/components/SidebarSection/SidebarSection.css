@@ -82,8 +82,9 @@
 
 .SidebarSection__chats-items {
     padding: 11px;
+    overflow-y: auto;
+    height: calc(100vh - 100px);
 }
-
 .SidebarSection__header-menu .dropdown-toggle {
     cursor: pointer;
     padding: 4px;

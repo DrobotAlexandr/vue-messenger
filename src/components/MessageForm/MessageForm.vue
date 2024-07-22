@@ -15,7 +15,10 @@
           <ul class="dropdown-menu">
             <li>
               <a class="dropdown-item" href="#">
-                Прикрепить изображение
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Прикрепить изображение</label>
+                  <input class="form-control" type="file" id="formFile">
+                </div>
               </a>
             </li>
           </ul>

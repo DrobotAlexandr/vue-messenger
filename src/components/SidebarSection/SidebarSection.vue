@@ -35,9 +35,7 @@
       </div>
       <div v-if="messages" class="SidebarSection__chats-items">
         <router-link v-for="message in messages" v-bind:key="message.id" to="/m/342342" class="SidebarSection__chats-item">
-          <div class="SidebarSection__chats-item-img">
-            <span>{{ message.user.avatar.letter }}</span>
-          </div>
+          <UserAvatar :letter="message.user.avatar.letter"/>
           <div class="SidebarSection__chats-item-context">
             <div class="SidebarSection__chats-item-context-title">
               <span v-html="message.title"></span>
@@ -64,10 +62,11 @@
 import {defineComponent} from 'vue';
 import '@/components/SidebarSection/SidebarSection.css';
 import SidebarSectionIsReadStatus from "@/components/SidebarSection/components/SidebarSectionIsReadStatus.vue";
+import UserAvatar from "@/components/UserAvatar/UserAvatar.vue";
 
 export default defineComponent({
   name: 'SidebarSection',
-  components: {SidebarSectionIsReadStatus},
+  components: {UserAvatar, SidebarSectionIsReadStatus},
   data() {
     return {
       messages: [
@@ -110,9 +109,51 @@ export default defineComponent({
           },
           time: '15:52',
           status: {
+            code: 'send'
+          }
+        },
+        {
+          id: 3,
+          title: 'Светлана Сергеевна',
+          text: 'Хорошо! Рада что вам теперь ...',
+          user: {
+            avatar: {
+              letter: 'С'
+            }
+          },
+          time: '22:01',
+          status: {
             code: 'read'
           }
-        }
+        },
+        {
+          id: 4,
+          title: 'David',
+          text: 'Спасибо, а когда я смогу пр...',
+          user: {
+            avatar: {
+              letter: 'D'
+            }
+          },
+          time: '12:59',
+          status: {
+            code: 'send'
+          }
+        },
+        {
+          id: 5,
+          title: 'Александр',
+          text: 'И как мне быть?',
+          user: {
+            avatar: {
+              letter: 'М'
+            }
+          },
+          time: '09:11',
+          status: {
+            code: 'read'
+          }
+        },
       ]
     };
   }

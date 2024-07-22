@@ -1,0 +1,19 @@
+.ChatHeader {
+    position: absolute;
+    width: 100vw;
+    background: #fff;
+    padding: 8px 8px 8px 20px;
+}
+
+.ChatHeader__user {
+    display: grid;
+    grid-template-columns: 70px auto;
+    align-items: center;
+    cursor: pointer;
+    max-width: 300px;
+}
+
+.ChatHeader__user-name {
+    font-size: 18px;
+    font-weight: bold;
+}

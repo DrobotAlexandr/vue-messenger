@@ -6,7 +6,7 @@
     <div class="messenger__view">
       <div class="messenger__view-container">
         <router-view/>
-        <MessageForm/>
+        <MessageForm v-if="$route.name==='chat'"/>
       </div>
     </div>
   </div>

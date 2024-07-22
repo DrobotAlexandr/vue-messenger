@@ -1,9 +1,21 @@
 .MessagesList__items {
     height: calc(100vh - 132px);
-    padding-top: 20px;
+    padding-top: 90px;
     overflow-y: auto;
     padding-right: 8px;
     padding-left: 30%;
+}
+
+@media screen and (max-width: 1500px) {
+    .MessagesList__items {
+        padding-left: 20%;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .MessagesList__items {
+        padding-left: 10%;
+    }
 }
 
 .MessagesList__item {

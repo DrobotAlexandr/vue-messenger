@@ -1,0 +1,25 @@
+.ChatHeaderUserCard__user {
+    display: grid;
+    grid-template-columns: 60px auto;
+    align-items: center;
+}
+
+.ChatHeaderUserCard__user-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.ChatHeaderUserCard__info {
+    padding: 16px;
+}
+
+.ChatHeaderUserCard__info-item {
+    display: grid;
+    grid-template-columns: 40px auto;
+    margin-bottom: 16px;
+}
+
+.ChatHeaderUserCard__info-icon svg {
+    width: 18px;
+    height: 18px;
+}
