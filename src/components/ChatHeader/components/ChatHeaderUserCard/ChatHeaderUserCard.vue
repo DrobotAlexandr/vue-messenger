@@ -19,7 +19,6 @@
           </div>
           <div class="modal-body">
             <div class="ChatHeaderUserCard__info">
-
               <div class="ChatHeaderUserCard__info-item">
                 <div class="ChatHeaderUserCard__info-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cake2"
@@ -56,7 +55,19 @@
                   Депрессия
                 </div>
               </div>
-
+            </div>
+            <div class="ChatHeaderUserCard__thanks">
+              <div class="ChatHeaderUserCard__thanks__title">
+                Вы можете отблагодарить психолога за консультацию на любую сумму
+              </div>
+              <form class="ChatHeaderUserCard__thanks-form">
+                <div class="ChatHeaderUserCard__thanks-form-item">
+                  <input type="number" placeholder="300 Рублей" class="form-control ChatHeaderUserCard__thanks-form-item-input">
+                </div>
+                <div class="ChatHeaderUserCard__thanks-form-item">
+                  <SubmitButton>К оплате</SubmitButton>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -69,10 +80,11 @@
 import {defineComponent} from 'vue';
 import '@/components/ChatHeader/components/ChatHeaderUserCard/ChatHeaderUserCard.css';
 import UserAvatar from "@/components/UserAvatar/UserAvatar.vue";
+import SubmitButton from "@/components/Ui/SubmitButton/SubmitButton.vue";
 
 export default defineComponent({
   name: 'ChatHeaderUserCard',
   props: ['user'],
-  components: {UserAvatar},
+  components: {SubmitButton, UserAvatar},
 });
 </script>

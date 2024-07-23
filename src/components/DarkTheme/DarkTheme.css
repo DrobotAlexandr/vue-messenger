@@ -1,0 +1,51 @@
+.DarkTheme {
+    text-align: center;
+}
+
+.DarkTheme__check {
+    display: inline-block;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+/******* Styles *********/
+
+[data-bs-theme="dark"] .ChatHeader {
+    background-color: var(--bg-dark);
+}
+
+[data-bs-theme="dark"] .SidebarSection {
+    background-color: var(--bg-dark);
+}
+
+[data-bs-theme="dark"] body {
+    background-color: var(--bg-dark);
+}
+
+[data-bs-theme="dark"] .MessageForm__box-message {
+    background: #121212;
+}
+
+[data-bs-theme="dark"] .MessagesList__item_left {
+    background: #121212;
+}
+
+[data-bs-theme="dark"] .MessageForm__box-message-textarea {
+    background: #121212;
+}
+
+[data-bs-theme="dark"] .SidebarSection__chats-item:hover {
+    background: rgb(57 57 63) !important;
+}
+
+[data-bs-theme="dark"] .SidebarSection__chats-item.router-link-active {
+    background: rgb(57 57 63) !important;
+}
+
+[data-bs-theme="dark"] .SidebarSection__chats-item-context-message {
+    color: #b1b1b1;
+}
+
+[data-bs-theme="dark"] .SidebarSection__header-search-input {
+    background: #121212 !important;
+}

@@ -23,3 +23,24 @@
     width: 18px;
     height: 18px;
 }
+
+.ChatHeaderUserCard__thanks {
+    padding: 20px;
+}
+
+.ChatHeaderUserCard__thanks__title {
+    margin-bottom: 16px;
+}
+
+.ChatHeaderUserCard__thanks-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.ChatHeaderUserCard__thanks-form-item-input {
+    max-width: 90%;
+}
+
+.ChatHeaderUserCard__thanks-form-item .btn {
+    height: 38px;
+}

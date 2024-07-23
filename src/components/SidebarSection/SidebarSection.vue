@@ -55,6 +55,9 @@
           </div>
         </router-link>
       </div>
+      <div class="SidebarSection__chats-settings">
+        <DarkTheme/>
+      </div>
     </div>
   </div>
 </template>
@@ -64,10 +67,11 @@ import {defineComponent} from 'vue';
 import '@/components/SidebarSection/SidebarSection.css';
 import SidebarSectionIsReadStatus from "@/components/SidebarSection/components/SidebarSectionIsReadStatus.vue";
 import UserAvatar from "@/components/UserAvatar/UserAvatar.vue";
+import DarkTheme from "@/components/DarkTheme/DarkTheme.vue";
 
 export default defineComponent({
   name: 'SidebarSection',
-  components: {UserAvatar, SidebarSectionIsReadStatus},
+  components: {DarkTheme, UserAvatar, SidebarSectionIsReadStatus},
   data() {
     return {
       messages: [
@@ -154,7 +158,7 @@ export default defineComponent({
           status: {
             code: 'read'
           }
-        },
+        }
       ]
     };
   }

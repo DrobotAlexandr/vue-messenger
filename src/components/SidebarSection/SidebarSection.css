@@ -87,7 +87,7 @@
 .SidebarSection__chats-items {
     padding: 11px;
     overflow-y: auto;
-    height: calc(100vh - 100px);
+    height: calc(100% - 170px);
 }
 
 .SidebarSection__header-menu .dropdown-toggle {
@@ -126,4 +126,8 @@
 
 .SidebarSection__header-search-input:focus {
     outline: 2px solid var(--theme-color) !important;
+}
+
+.SidebarSection__chats {
+    height: calc(100% - 50px);
 }

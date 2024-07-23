@@ -22,11 +22,15 @@
     display: none;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.ChatHeader__user-name {
+.ChatHeader__user-mobile-name {
     cursor: pointer;
     text-align: center;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .ChatHeader__user-mobile-avatar {

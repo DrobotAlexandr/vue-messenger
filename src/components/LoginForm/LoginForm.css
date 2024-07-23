@@ -45,6 +45,7 @@
     color: #606060;
     font-weight: bold;
     font-size: 14px;
+    position: relative;
 }
 
 .LoginForm__item-confirm-controls {
@@ -69,6 +70,7 @@
     color: #555;
     font-weight: bold;
     font-size: 14px;
+    position: relative;
 }
 
 .LoginForm__item-confirm-controls-input-text {

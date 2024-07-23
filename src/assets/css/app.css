@@ -7,6 +7,7 @@
     /* Colors */
 
     --theme-color: #5D5FEF;
+    --bg-dark: #212429;
 
     /* Bootstrap */
     --bs-border-radius: 8px;
@@ -17,9 +18,9 @@
 
 body {
     background-color: #ecebff99;
-    height: 100vh;
+    height: 100%;
     font-family: var(--font-default);
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .messenger {
@@ -97,4 +98,10 @@ select.form-control {
 }
 
 ::-webkit-resizer {
+}
+
+@supports (-webkit-touch-callout: none) {
+    .h-screen {
+        height: -webkit-fill-available;
+    }
 }
