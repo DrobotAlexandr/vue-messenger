@@ -69,6 +69,7 @@ select.form-control {
     max-width: 1000px;
     height: 100vh;
     position: relative;
+    padding-right: 20px;
 }
 
 ::-webkit-scrollbar {

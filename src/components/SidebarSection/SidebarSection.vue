@@ -34,7 +34,8 @@
         </div>
       </div>
       <div v-if="messages" class="SidebarSection__chats-items">
-        <router-link v-for="message in messages" v-bind:key="message.id" to="/m/342342" class="SidebarSection__chats-item">
+        <router-link v-for="message in messages" v-bind:key="message.id" :to="'/m/'+message.id"
+                     class="SidebarSection__chats-item">
           <UserAvatar :letter="message.user.avatar.letter"/>
           <div class="SidebarSection__chats-item-context">
             <div class="SidebarSection__chats-item-context-title">
@@ -113,7 +114,7 @@ export default defineComponent({
           }
         },
         {
-          id: 3,
+          id: 4,
           title: 'Светлана Сергеевна',
           text: 'Хорошо! Рада что вам теперь ...',
           user: {
@@ -127,7 +128,7 @@ export default defineComponent({
           }
         },
         {
-          id: 4,
+          id: 5,
           title: 'David',
           text: 'Спасибо, а когда я смогу пр...',
           user: {
@@ -141,7 +142,7 @@ export default defineComponent({
           }
         },
         {
-          id: 5,
+          id: 6,
           title: 'Александр',
           text: 'И как мне быть?',
           user: {

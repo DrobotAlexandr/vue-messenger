@@ -17,3 +17,42 @@
     font-size: 18px;
     font-weight: bold;
 }
+
+.ChatHeader__user-mobile {
+    display: none;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+
+.ChatHeader__user-name {
+    cursor: pointer;
+    text-align: center;
+}
+
+.ChatHeader__user-mobile-avatar {
+    text-align: right;
+}
+
+.ChatHeader__user-mobile .UserAvatar {
+    display: inline-block;
+}
+
+.ChatHeader__user-mobile .UserAvatar__img {
+    width: 40px;
+    height: 40px;
+}
+
+.ChatHeader__user-back {
+    text-decoration: none;
+    color: var(--theme-color);
+}
+
+.ChatHeader__user-back svg {
+    width: 30px;
+    height: 30px;
+    fill: var(--theme-color)
+}
+
+.ChatHeader__user-back span {
+
+}

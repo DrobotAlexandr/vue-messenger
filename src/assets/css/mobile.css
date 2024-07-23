@@ -1,0 +1,74 @@
+/* mobile */
+
+@media screen and (max-width: 768px) {
+
+    .messenger-screen-main .messenger__view {
+        display: none;
+    }
+
+    .messenger.messenger-screen-main {
+        display: block;
+    }
+
+    .messenger.messenger-screen-chat {
+        display: block;
+    }
+
+    .messenger-screen-chat .messenger__sidebar {
+        display: none;
+    }
+
+    .ChatHeader__user {
+        display: none !important;
+    }
+
+    .ChatHeader__user-mobile {
+        display: grid !important;
+    }
+
+    .messenger__view-container {
+        padding: 0;
+    }
+
+    .MessagesList__items {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 70px;
+    }
+
+    .MessageForm__box-send-button-btn {
+        width: 40px;
+        height: 40px;
+        margin-top: 11px;
+    }
+
+    .MessageForm__box-message {
+        padding: 0px 10px 0 20px;
+    }
+
+    .MessageForm {
+        padding: 0 20px 0 20px;
+        bottom: 18px;
+    }
+
+    .MessageForm__box {
+        grid-template-columns: auto 52px;
+    }
+
+    .MessageForm__box-message-textarea {
+        padding-top: 16px;
+    }
+
+    .MessageForm__box-message-attach {
+        padding-top: 19px;
+    }
+
+    .MessagesList__items {
+        height: calc(100vh - 90px) !important;
+    }
+
+    .MessagesList__items {
+        padding-left: 20px !important;
+    }
+
+}

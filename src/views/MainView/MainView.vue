@@ -1,6 +1,6 @@
 <template>
   <div class="MainView">
-    MainView
+
   </div>
 </template>
 

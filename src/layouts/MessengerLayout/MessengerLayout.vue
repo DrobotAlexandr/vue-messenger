@@ -1,5 +1,5 @@
 <template>
-  <div class="messenger">
+  <div :class="'messenger messenger-screen-'+$route.name">
     <div class="messenger__sidebar">
       <SidebarSection/>
     </div>

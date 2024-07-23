@@ -39,6 +39,10 @@
     border-radius: 0.75rem;
 }
 
+.SidebarSection__chats-item.router-link-active {
+    background: rgb(218 218 255) !important;
+}
+
 .SidebarSection__chats-item:hover {
     background: rgb(244, 244, 245);
 }
@@ -85,6 +89,7 @@
     overflow-y: auto;
     height: calc(100vh - 100px);
 }
+
 .SidebarSection__header-menu .dropdown-toggle {
     cursor: pointer;
     padding: 4px;

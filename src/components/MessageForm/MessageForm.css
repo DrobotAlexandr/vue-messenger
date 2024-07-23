@@ -4,6 +4,7 @@
     left: 0;
     width: 100%;
     padding-left: 30%;
+    padding-right: 20px;
 }
 
 .MessageForm__box {
@@ -63,3 +64,16 @@
 .MessageForm__box-message-attach {
     padding-top: 9px;
 }
+
+@media screen and (max-width: 1500px) {
+    .MessageForm {
+        padding-left: 10%;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .MessageForm {
+        padding-left: 5%;
+    }
+}
+
