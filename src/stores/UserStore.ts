@@ -15,7 +15,10 @@ export const useUserStore = defineStore('user', {
             this.userId = id;
             localStorage.setItem('userId', id);
         },
-        getUserId() {
+        getUserId(): string {
+            if (!this.userId) {
+                return '';
+            }
             return this.userId;
         },
         clearUserId() {
