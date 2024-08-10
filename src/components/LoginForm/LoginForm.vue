@@ -96,6 +96,8 @@ import {defineComponent} from 'vue';
 import '@/components/LoginForm/LoginForm.css';
 import SubmitButton from "@/components/Ui/SubmitButton/SubmitButton.vue";
 import LoginFormSuccessCheck from "@/components/LoginForm/components/LoginFormSuccessCheck.vue";
+import ChatApi from "@/api/ChatApi";
+import {useUserStore} from "@/stores/UserStore"
 
 interface ProblemCategory {
   id: number;
@@ -183,15 +185,44 @@ export default defineComponent({
           this.validate.privatePolicyCheck);
     },
 
-    sendLoginForm(): void {
+    async sendLoginForm() {
 
       this.buttonLoading = true;
 
-      setTimeout(() => {
-        this.$router.push('/m/1');
-      }, 2000);
+      const res = await ChatApi.createChat(
+          {
+            name: this.form.userName,
+            age: this.form.userAge,
+            gender: this.form.userGender,
+            category: this.form.problemCategoryId
+          }
+      );
 
-    }
+      if (res.status === 'ok') {
+
+        const userStore = useUserStore();
+
+        userStore.setUserId(res.userId);
+
+        setTimeout(() => {
+          this.$router.push('/m/' + res.chatId);
+        }, 1000);
+
+      } else if (res.status === 'error') {
+
+        alert(res.errorMessage);
+        this.buttonLoading = false;
+
+      } else {
+
+        alert('ServerError!');
+        this.buttonLoading = false;
+
+      }
+
+
+    },
+
   }
 });
 </script>
