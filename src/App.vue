@@ -28,16 +28,13 @@ const checkUser = async () => {
 
   if (!user.id && router.currentRoute.value.name !== 'login') {
     await router.push('/login/');
-  } else if (router.currentRoute.value.name !== 'chat') {
+    return;
+  } else if (router.currentRoute.value.name !== 'chat' && user.lastChatId) {
     await router.push('/m/' + user.lastChatId);
+    return;
   }
 
 };
-
-
-onMounted(() => {
-  checkUser();
-});
 
 watch(() => router.currentRoute.value, () => {
   checkUser();

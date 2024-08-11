@@ -65,6 +65,11 @@
     padding-top: 9px;
 }
 
+.MessageForm__box-send-button.disabled {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
 @media screen and (max-width: 1500px) {
     .MessageForm {
         padding-left: 10%;

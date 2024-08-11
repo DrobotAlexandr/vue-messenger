@@ -1,7 +1,7 @@
 <template>
   <div class="LiveChatWorker">
 
-    <LiveChatWorkerLoader/>
+    <LiveChatWorkerLoader v-if="loader"/>
 
   </div>
 </template>
@@ -18,20 +18,31 @@ export default defineComponent({
   name: 'LiveChatWorker',
   components: {LiveChatWorkerLoader},
   data() {
-    return {}
+    return {
+      loader: true
+    }
   },
   created() {
-    this.getUpdates();
+    this.getUpdates('');
   },
 
   methods: {
-    async getUpdates() {
+    async getUpdates(version: string) {
 
       const liveChatStore = useLiveChatStore();
 
-      const updates = await LiveChatApi.getUpdates();
+      const updates = await LiveChatApi.getUpdates({version: version});
 
-      liveChatStore.setChats(updates.chats);
+      if (updates.chats) {
+        liveChatStore.setChats(updates.chats);
+        liveChatStore.setMessages(updates.messages);
+        this.loader = true;
+        setTimeout(() => {
+          this.loader = false;
+        }, 1000);
+      }
+
+      await this.getUpdates(updates.version);
 
     }
   }
