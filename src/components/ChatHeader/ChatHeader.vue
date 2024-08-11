@@ -5,6 +5,7 @@
         <UserAvatar :letter="user.letter"/>
         <div class="ChatHeader__user-name">
           {{ user.name }}
+          <LiveChatWorker/>
         </div>
       </div>
       <div class="ChatHeader__user-mobile">
@@ -33,11 +34,12 @@ import {defineComponent} from 'vue';
 import '@/components/ChatHeader/ChatHeader.css';
 import UserAvatar from "@/components/UserAvatar/UserAvatar.vue";
 import ChatHeaderUserCard from "@/components/ChatHeader/components/ChatHeaderUserCard/ChatHeaderUserCard.vue";
+import LiveChatWorker from "@/components/LiveChatWorker/LiveChatWorker.vue";
 
 
 export default defineComponent({
   name: 'ChatHeader',
-  components: {ChatHeaderUserCard, UserAvatar},
+  components: {LiveChatWorker, ChatHeaderUserCard, UserAvatar},
   data() {
     return {
       user: {
