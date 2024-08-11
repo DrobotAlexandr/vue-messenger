@@ -33,24 +33,24 @@
           Все
         </div>
       </div>
-      <div v-if="messages" class="SidebarSection__chats-items">
-        <router-link v-for="message in messages" v-bind:key="message.id" :to="'/m/'+message.id"
+      <div v-if="chats" class="SidebarSection__chats-items">
+        <router-link v-for="chat in chats" v-bind:key="chat.id" :to="'/m/'+chat.id"
                      class="SidebarSection__chats-item">
-          <UserAvatar :letter="message.user.avatar.letter"/>
+          <UserAvatar :letter="chat.companion.avatar.letter"/>
           <div class="SidebarSection__chats-item-context">
             <div class="SidebarSection__chats-item-context-title">
-              <span v-html="message.title"></span>
+              <span v-html="chat.companion.name"></span>
             </div>
             <div class="SidebarSection__chats-item-context-message">
-              <span v-html="message.text"></span>
+              <span v-html="chat.lastMessage.text"></span>
             </div>
           </div>
           <div class="SidebarSection__chats-item-helper">
             <div class="SidebarSection__chats-item-helper-read-status">
-              <SidebarSectionIsReadStatus :status="message.status.code"/>
+              <SidebarSectionIsReadStatus :status="chat.lastMessage.read"/>
             </div>
             <div class="SidebarSection__chats-item-helper-time">
-              <span v-html="message.time"></span>
+              <span v-html="chat.lastMessage.time"></span>
             </div>
           </div>
         </router-link>
@@ -63,104 +63,22 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, computed} from 'vue';
 import '@/components/SidebarSection/SidebarSection.css';
 import SidebarSectionIsReadStatus from "@/components/SidebarSection/components/SidebarSectionIsReadStatus.vue";
 import UserAvatar from "@/components/UserAvatar/UserAvatar.vue";
 import DarkTheme from "@/components/DarkTheme/DarkTheme.vue";
+import {useLiveChatStore} from "@/stores/LiveChatStore";
 
 export default defineComponent({
   name: 'SidebarSection',
   components: {DarkTheme, UserAvatar, SidebarSectionIsReadStatus},
-  data() {
+  setup() {
+    const liveChatStore = useLiveChatStore();
+    const chats = computed(() => liveChatStore.getChats());
     return {
-      messages: [
-        {
-          id: 1,
-          title: 'Инна',
-          text: 'Добрый день! Что вас интересует...',
-          user: {
-            avatar: {
-              letter: 'И'
-            }
-          },
-          time: '15:04',
-          status: {
-            code: 'send'
-          }
-        },
-        {
-          id: 2,
-          title: 'Сергей',
-          text: 'Я хотел бы узнать у вас...',
-          user: {
-            avatar: {
-              letter: 'С'
-            }
-          },
-          time: '11:23',
-          status: {
-            code: 'read'
-          }
-        },
-        {
-          id: 3,
-          title: 'Марина',
-          text: 'Ок',
-          user: {
-            avatar: {
-              letter: 'М'
-            }
-          },
-          time: '15:52',
-          status: {
-            code: 'send'
-          }
-        },
-        {
-          id: 4,
-          title: 'Светлана Сергеевна',
-          text: 'Хорошо! Рада что вам теперь ...',
-          user: {
-            avatar: {
-              letter: 'С'
-            }
-          },
-          time: '22:01',
-          status: {
-            code: 'read'
-          }
-        },
-        {
-          id: 5,
-          title: 'David',
-          text: 'Спасибо, а когда я смогу пр...',
-          user: {
-            avatar: {
-              letter: 'D'
-            }
-          },
-          time: '12:59',
-          status: {
-            code: 'send'
-          }
-        },
-        {
-          id: 6,
-          title: 'Александр',
-          text: 'И как мне быть?',
-          user: {
-            avatar: {
-              letter: 'М'
-            }
-          },
-          time: '09:11',
-          status: {
-            code: 'read'
-          }
-        }
-      ]
+      chats,
     };
-  }
+  },
 });
 </script>
