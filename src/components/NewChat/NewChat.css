@@ -1,0 +1,50 @@
+.NewChat {
+    padding-top: 8px;
+}
+
+.NewChat .SubmitButton button {
+    padding: 4px;
+    height: 40px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.NewChat__warning-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.NewChat__warning {
+    display: grid;
+    grid-template-columns: 40px auto;
+    align-items: center;
+}
+
+.NewChat__warning-form-item {
+    margin-bottom: 24px;
+}
+
+.NewChat__warning-form-item button {
+    width: 100%;
+    max-width: 100%;
+}
+
+.LoginForm__item-title {
+    margin-bottom: 16px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.NewChat__warning-form-item .disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+/* mobile */
+
+@media screen and (max-width: 768px) {
+    .NewChat {
+        padding: 20px;
+    }
+}

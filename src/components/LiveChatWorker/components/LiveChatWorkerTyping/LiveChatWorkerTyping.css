@@ -1,0 +1,19 @@
+.LiveChatWorkerTyping {
+    display: grid;
+    grid-template-columns: 60px auto;
+    align-items: center;
+}
+
+.LiveChatWorkerTyping__text {
+    font-size: 11px;
+}
+
+.LiveChatWorkerTyping__loader {
+
+}
+
+.LiveChatWorkerTyping__loader svg {
+    width: 20px;
+    margin-top: -2px;
+    opacity: 0.5;
+}

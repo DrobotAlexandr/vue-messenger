@@ -30,12 +30,18 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
-import '@/components/ChatHeader/ChatHeader.css';
-import UserAvatar from "@/components/UserAvatar/UserAvatar.vue";
-import ChatHeaderUserCard from "@/components/ChatHeader/components/ChatHeaderUserCard/ChatHeaderUserCard.vue";
-import LiveChatWorker from "@/components/LiveChatWorker/LiveChatWorker.vue";
 
+import {defineComponent, computed, watch} from 'vue';
+import {useLiveChatStore} from "@/stores/LiveChatStore";
+import LiveChatWorker from "@/components/LiveChatWorker/LiveChatWorker.vue";
+import ChatHeaderUserCard from "@/components/ChatHeader/components/ChatHeaderUserCard/ChatHeaderUserCard.vue";
+import UserAvatar from "@/components/UserAvatar/UserAvatar.vue";
+import '@/components/ChatHeader/ChatHeader.css';
+
+interface Chat {
+  id: string;
+  message: string;
+}
 
 export default defineComponent({
   name: 'ChatHeader',
@@ -43,10 +49,45 @@ export default defineComponent({
   data() {
     return {
       user: {
-        letter: 'И',
-        name: 'Инна'
+        letter: '',
+        name: ''
       }
+    }
+  },
+  created() {
+    this.setUser({});
+  },
+  computed: {
+    liveChatData() {
+      const liveChatStore = useLiveChatStore();
+      return liveChatStore.chats;
+    }
+  },
+  watch: {
+    liveChatData(chats) {
+      this.setUser(chats);
+    },
+    '$route'(to, from) {
+      const liveChatStore = useLiveChatStore();
+      this.setUser(liveChatStore.chats);
+    }
+  },
+  methods: {
+    setUser(chats: object) {
+
+      if (Array.isArray(chats)) {
+
+        const chatIdToFind = this.$route.params.chatId;
+        const foundChat = chats.find((chat: Chat) => chat.id === chatIdToFind);
+
+        this.user.name = foundChat.companion.name;
+        this.user.letter = foundChat.companion.avatar.letter;
+
+      }
+
+
     }
   }
 });
+
 </script>

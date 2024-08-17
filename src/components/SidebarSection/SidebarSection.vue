@@ -12,7 +12,7 @@
           </span>
           <ul class="dropdown-menu">
             <li>
-              <router-link to="/login" class="dropdown-item">Выход</router-link>
+              <a href="/" class="dropdown-item">Выход</a>
             </li>
           </ul>
         </div>
@@ -55,6 +55,9 @@
           </div>
         </router-link>
       </div>
+      <div v-if="userRole==='user'" class="SidebarSection__chats-new-chat">
+        <NewChat/>
+      </div>
       <div class="SidebarSection__chats-settings">
         <DarkTheme/>
       </div>
@@ -69,15 +72,27 @@ import SidebarSectionIsReadStatus from "@/components/SidebarSection/components/S
 import UserAvatar from "@/components/UserAvatar/UserAvatar.vue";
 import DarkTheme from "@/components/DarkTheme/DarkTheme.vue";
 import {useLiveChatStore} from "@/stores/LiveChatStore";
+import {useUserStore} from "@/stores/UserStore";
+import NewChat from "@/components/NewChat/NewChat.vue";
+import {useRouter} from "vue-router";
 
 export default defineComponent({
   name: 'SidebarSection',
-  components: {DarkTheme, UserAvatar, SidebarSectionIsReadStatus},
+  components: {NewChat, DarkTheme, UserAvatar, SidebarSectionIsReadStatus},
   setup() {
+    const router = useRouter();
     const liveChatStore = useLiveChatStore();
+    const userStore = useUserStore();
     const chats = computed(() => liveChatStore.getChats());
+    const userRole = computed(() => userStore.getUserRole());
+
+    if (!chats.value || (Array.isArray(chats.value) && chats.value.length === 0)) {
+      router.push('/m/');
+    }
+
     return {
       chats,
+      userRole
     };
   },
 });

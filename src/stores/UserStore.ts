@@ -2,12 +2,14 @@ import {defineStore} from "pinia";
 
 interface UserState {
     userId: string | null;
+    userRole: string;
 }
 
 export const useUserStore = defineStore('user', {
     state: (): UserState => {
         return {
             userId: localStorage.getItem('userId') || null,
+            userRole: '',
         }
     },
     actions: {
@@ -20,6 +22,15 @@ export const useUserStore = defineStore('user', {
                 return '';
             }
             return this.userId;
+        },
+        setUserRole(role: string) {
+            this.userRole = role;
+        },
+        getUserRole(): string {
+            if (!this.userRole) {
+                return '';
+            }
+            return this.userRole;
         },
         clearUserId() {
             this.userId = null;

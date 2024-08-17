@@ -6,7 +6,8 @@
 
         <MessageFormImagePreview :image="image" @remove-image="removeImage"/>
 
-        <textarea v-model="message" @input="validate" class="MessageForm__box-message-textarea"
+        <textarea @change="setChatTyping" @click="setChatTyping" v-model="message" @input="validate"
+                  class="MessageForm__box-message-textarea"
                   placeholder="Сообщение"></textarea>
 
         <div v-if="image.length < 1" class="MessageForm__box-message-attach dropdown">
@@ -52,6 +53,7 @@ import '@/components/MessageForm/MessageForm.css';
 import MessagesApi from "@/api/MessagesApi";
 import MessageFormImagePreview
   from "@/components/MessageForm/components/MessageFormImagePreview/MessageFormImagePreview.vue";
+import ChatApi from "@/api/ChatApi";
 
 export default defineComponent({
   name: 'MessageForm',
@@ -101,6 +103,9 @@ export default defineComponent({
     },
     removeImage() {
       this.image = '';
+    },
+    setChatTyping() {
+      ChatApi.setChatTyping({chatId: this.$route.params.chatId});
     }
   }
 })

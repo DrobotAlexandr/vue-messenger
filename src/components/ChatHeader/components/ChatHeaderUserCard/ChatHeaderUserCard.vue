@@ -56,19 +56,22 @@
                 </div>
               </div>
             </div>
-            <div class="ChatHeaderUserCard__thanks">
+
+            <div v-if="userRole==='user'" class="ChatHeaderUserCard__thanks">
               <div class="ChatHeaderUserCard__thanks__title">
                 Вы можете отблагодарить психолога за консультацию на любую сумму
               </div>
               <form class="ChatHeaderUserCard__thanks-form">
                 <div class="ChatHeaderUserCard__thanks-form-item">
-                  <input type="number" placeholder="300 Рублей" class="form-control ChatHeaderUserCard__thanks-form-item-input">
+                  <input type="number" placeholder="300 Рублей"
+                         class="form-control ChatHeaderUserCard__thanks-form-item-input">
                 </div>
                 <div class="ChatHeaderUserCard__thanks-form-item">
                   <SubmitButton>К оплате</SubmitButton>
                 </div>
               </form>
             </div>
+
           </div>
         </div>
       </div>
@@ -77,14 +80,25 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {computed, defineComponent} from 'vue';
 import '@/components/ChatHeader/components/ChatHeaderUserCard/ChatHeaderUserCard.css';
 import UserAvatar from "@/components/UserAvatar/UserAvatar.vue";
 import SubmitButton from "@/components/Ui/SubmitButton/SubmitButton.vue";
+import {useUserStore} from "@/stores/UserStore";
 
 export default defineComponent({
   name: 'ChatHeaderUserCard',
   props: ['user'],
   components: {SubmitButton, UserAvatar},
+  setup() {
+
+    const userStore = useUserStore();
+
+    const userRole = computed(() => userStore.getUserRole());
+
+    return {
+      userRole
+    };
+  },
 });
 </script>

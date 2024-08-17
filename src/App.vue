@@ -26,10 +26,12 @@ const checkUser = async () => {
 
   const user = await UserApi.getUser(userId);
 
+  userStore.setUserRole(user.role);
+
   if (!user.id && router.currentRoute.value.name !== 'login') {
     await router.push('/login/');
     return;
-  } else if (router.currentRoute.value.name !== 'chat' && user.lastChatId) {
+  } else if (router.currentRoute.value.name !== 'chat' && router.currentRoute.value.name !== 'main' && user.lastChatId) {
     await router.push('/m/' + user.lastChatId);
     return;
   }
