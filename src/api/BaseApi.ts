@@ -4,6 +4,7 @@ class BaseApi {
     protected static async request(endpoint: string, data: object) {
 
         if (!axios.defaults.baseURL) {
+            //axios.defaults.baseURL = 'https://psihologram.ru/chat/api';
             axios.defaults.baseURL = 'http://psyholog-gram.loc/chat/api';
         }
 

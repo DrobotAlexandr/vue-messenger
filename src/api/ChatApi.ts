@@ -6,6 +6,10 @@ class ChatApi extends BaseApi {
         return await this.request('/chats/create-chat', data);
     }
 
+    public static async getProblemsCategories() {
+        return await this.request('/chats/get-problem-categories', {});
+    }
+
 }
 
 export default ChatApi;
