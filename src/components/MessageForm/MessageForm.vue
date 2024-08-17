@@ -3,9 +3,14 @@
 
     <div class="MessageForm__box">
       <div class="MessageForm__box-message">
+
+        <MessageFormImagePreview :image="image" @remove-image="removeImage"/>
+
         <textarea v-model="message" @input="validate" class="MessageForm__box-message-textarea"
                   placeholder="Сообщение"></textarea>
-        <div class="MessageForm__box-message-attach dropdown">
+
+        <div v-if="image.length < 1" class="MessageForm__box-message-attach dropdown">
+
           <div class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-paperclip"
                  viewBox="0 0 16 16">
@@ -13,16 +18,18 @@
                   d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>
             </svg>
           </div>
+
           <ul class="dropdown-menu">
             <li>
               <a class="dropdown-item" href="#">
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Прикрепить изображение</label>
-                  <input class="form-control" type="file" id="formFile">
+                  <input @change="setImage" class="form-control" type="file" id="formFile" accept="image/*">
                 </div>
               </a>
             </li>
           </ul>
+
         </div>
       </div>
       <div @click="sendMessage" :class="'MessageForm__box-send-button '+buttonDisabledClass">
@@ -43,34 +50,58 @@
 import {defineComponent} from 'vue';
 import '@/components/MessageForm/MessageForm.css';
 import MessagesApi from "@/api/MessagesApi";
+import MessageFormImagePreview
+  from "@/components/MessageForm/components/MessageFormImagePreview/MessageFormImagePreview.vue";
 
 export default defineComponent({
   name: 'MessageForm',
-  components: {},
+  components: {MessageFormImagePreview},
   data() {
     return {
       message: '',
+      image: '',
       buttonDisabledClass: 'disabled'
     }
   },
   methods: {
+    setImage(event: any) {
+      const file = event.target.files[0];
+
+      if (file.size > 2097152) {
+        alert('Изображение не должно быть более 2мб!');
+        return false;
+      }
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.image = e.target.result;
+          this.validate();
+        };
+        reader.readAsDataURL(file);
+      }
+    },
     sendMessage() {
       MessagesApi.sendMessage(
           {
             chatId: this.$route.params.chatId,
             message: this.message,
-            image: ''
+            image: this.image
           }
       );
       this.message = '';
+      this.image = '';
     },
     validate() {
-      if (this.message.length > 0) {
+      if (this.message.length > 0 || this.image.length > 0) {
         this.buttonDisabledClass = ''
       } else {
         this.buttonDisabledClass = 'disabled'
       }
+    },
+    removeImage() {
+      this.image = '';
     }
   }
-});
+})
 </script>

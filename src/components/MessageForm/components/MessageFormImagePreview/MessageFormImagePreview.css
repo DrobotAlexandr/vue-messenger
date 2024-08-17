@@ -1,0 +1,27 @@
+.MessageFormImagePreview {
+    position: absolute;
+    left: 0;
+    bottom: 78px;
+    background: #dadaff;
+    padding: 8px;
+    border-radius: 16px;
+}
+
+.MessageFormImagePreview__image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.MessageFormImagePreview__header {
+    display: grid;
+    grid-template-columns: auto 40px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.MessageFormImagePreview__header-remove svg {
+    cursor: pointer;
+    float: right;
+}

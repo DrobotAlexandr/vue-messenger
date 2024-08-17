@@ -11,6 +11,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: auto 90px;
+    position: relative;
 }
 
 .MessageForm__box-message {

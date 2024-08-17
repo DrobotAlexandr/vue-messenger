@@ -4,8 +4,11 @@ class BaseApi {
     protected static async request(endpoint: string, data: object) {
 
         if (!axios.defaults.baseURL) {
-            //axios.defaults.baseURL = 'https://psihologram.ru/chat/api';
-            axios.defaults.baseURL = 'http://psyholog-gram.loc/chat/api';
+            if (window.location.hostname === 'localhost') {
+                axios.defaults.baseURL = 'http://psyholog-gram.loc/chat/api';
+            } else {
+                axios.defaults.baseURL = 'https://psihologram.ru/chat/api';
+            }
         }
 
         const userId = localStorage.getItem('userId');
