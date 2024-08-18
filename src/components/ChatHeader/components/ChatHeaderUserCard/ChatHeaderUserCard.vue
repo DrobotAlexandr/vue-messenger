@@ -29,7 +29,7 @@
                   </svg>
                 </div>
                 <div class="ChatHeaderUserCard__info-value">
-                  {{user.age}}
+                  {{ user.age }}
                 </div>
               </div>
               <div v-if="user.gender" class="ChatHeaderUserCard__info-item">
@@ -41,7 +41,7 @@
                   </svg>
                 </div>
                 <div class="ChatHeaderUserCard__info-value">
-                  {{user.gender}}
+                  {{ user.gender }}
                 </div>
               </div>
               <div v-if="user.category" class="ChatHeaderUserCard__info-item">
@@ -53,19 +53,19 @@
                   </svg>
                 </div>
                 <div class="ChatHeaderUserCard__info-value">
-                  {{user.category}}
+                  {{ user.category }}
                 </div>
               </div>
             </div>
 
-            <div v-if="userRole==='user'" class="ChatHeaderUserCard__thanks">
+            <div v-if="userRole==='user' && user.bxUserId" class="ChatHeaderUserCard__thanks">
               <div class="ChatHeaderUserCard__thanks__title">
                 Вы можете отблагодарить психолога за консультацию на любую сумму
               </div>
               <form action="/api/psychologists/donate.php" class="ChatHeaderUserCard__thanks-form">
                 <div class="ChatHeaderUserCard__thanks-form-item">
                   <input type="hidden" name="bxUserId" :value="user.bxUserId">
-                  <input min="100" required type="number" placeholder="300 Рублей"
+                  <input name="sum" min="100" required type="number" placeholder="300 Рублей"
                          class="form-control ChatHeaderUserCard__thanks-form-item-input">
                 </div>
                 <div class="ChatHeaderUserCard__thanks-form-item">
