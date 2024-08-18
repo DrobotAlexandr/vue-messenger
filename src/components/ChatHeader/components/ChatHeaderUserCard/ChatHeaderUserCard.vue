@@ -19,7 +19,8 @@
           </div>
           <div class="modal-body">
             <div class="ChatHeaderUserCard__info">
-              <div class="ChatHeaderUserCard__info-item">
+
+              <div v-if="user.age" class="ChatHeaderUserCard__info-item">
                 <div class="ChatHeaderUserCard__info-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cake2"
                        viewBox="0 0 16 16">
@@ -28,10 +29,10 @@
                   </svg>
                 </div>
                 <div class="ChatHeaderUserCard__info-value">
-                  19
+                  {{user.age}}
                 </div>
               </div>
-              <div class="ChatHeaderUserCard__info-item">
+              <div v-if="user.gender" class="ChatHeaderUserCard__info-item">
                 <div class="ChatHeaderUserCard__info-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                        class="bi bi-gender-male" viewBox="0 0 16 16">
@@ -40,10 +41,10 @@
                   </svg>
                 </div>
                 <div class="ChatHeaderUserCard__info-value">
-                  Мужщина
+                  {{user.gender}}
                 </div>
               </div>
-              <div class="ChatHeaderUserCard__info-item">
+              <div v-if="user.category" class="ChatHeaderUserCard__info-item">
                 <div class="ChatHeaderUserCard__info-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell"
                        viewBox="0 0 16 16">
@@ -52,7 +53,7 @@
                   </svg>
                 </div>
                 <div class="ChatHeaderUserCard__info-value">
-                  Депрессия
+                  {{user.category}}
                 </div>
               </div>
             </div>
@@ -61,9 +62,10 @@
               <div class="ChatHeaderUserCard__thanks__title">
                 Вы можете отблагодарить психолога за консультацию на любую сумму
               </div>
-              <form class="ChatHeaderUserCard__thanks-form">
+              <form action="/api/psychologists/donate.php" class="ChatHeaderUserCard__thanks-form">
                 <div class="ChatHeaderUserCard__thanks-form-item">
-                  <input type="number" placeholder="300 Рублей"
+                  <input type="hidden" name="bxUserId" :value="user.bxUserId">
+                  <input min="100" required type="number" placeholder="300 Рублей"
                          class="form-control ChatHeaderUserCard__thanks-form-item-input">
                 </div>
                 <div class="ChatHeaderUserCard__thanks-form-item">

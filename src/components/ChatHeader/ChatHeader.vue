@@ -50,7 +50,11 @@ export default defineComponent({
     return {
       user: {
         letter: '',
-        name: ''
+        name: '',
+        age: '',
+        gender: '',
+        category: '',
+        bxUserId: '',
       }
     }
   },
@@ -82,6 +86,10 @@ export default defineComponent({
 
         this.user.name = foundChat.companion.name;
         this.user.letter = foundChat.companion.avatar.letter;
+        this.user.age = foundChat.companion.age;
+        this.user.gender = foundChat.companion.gender;
+        this.user.category = foundChat.companion.category;
+        this.user.bxUserId = foundChat.companion.bxUserId;
 
       }
 

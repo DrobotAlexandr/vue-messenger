@@ -31,7 +31,16 @@ export default defineComponent({
     }
   },
   created() {
-    this.getUpdates('');
+    this.getUpdates('', '');
+
+    const searchInput = document.querySelector('.SidebarSection__header-search-input') as HTMLInputElement;
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        this.getUpdates('', searchInput.value);
+      });
+    }
+
+
   },
   watch: {
     '$route'(to, from) {
@@ -39,11 +48,18 @@ export default defineComponent({
     }
   },
   methods: {
-    async getUpdates(version: string) {
+    async getUpdates(version: string, query: string) {
 
       const liveChatStore = useLiveChatStore();
 
-      const updates = await LiveChatApi.getUpdates({version: version});
+      const searchInput = document.querySelector('.SidebarSection__header-search-input') as HTMLInputElement;
+      let queryParam = '';
+
+      if (searchInput) {
+        queryParam = searchInput.value;
+      }
+
+      const updates = await LiveChatApi.getUpdates({version: version, query: queryParam});
 
       if (updates.chats) {
         liveChatStore.setChats(updates.chats);
@@ -52,8 +68,6 @@ export default defineComponent({
 
         const currentChat = this.getCurrentChat(updates.chats);
 
-        console.log(currentChat);
-
         this.setTyping(currentChat);
 
         setTimeout(() => {
@@ -61,7 +75,9 @@ export default defineComponent({
         }, 1000);
       }
 
-      await this.getUpdates(updates.version);
+      if (!query.length) {
+        await this.getUpdates(updates.version, '');
+      }
 
     },
     getCurrentChat(chats: any) {
