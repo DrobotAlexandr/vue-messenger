@@ -17,7 +17,7 @@
 .MessageForm__box-message {
     width: 100%;
     display: grid;
-    grid-template-columns: auto 30px;
+    grid-template-columns: auto 30px 30px;
     background: #fff;
     padding: 16px 16px 0 16px;
     border-radius: 8px;

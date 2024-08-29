@@ -1,0 +1,100 @@
+.MessageFormVoiceMessage__menu-item {
+    margin-bottom: 8px;
+}
+
+.MessageFormVoiceMessage__menu-item-link {
+    display: grid !important;
+    grid-template-columns: 40px auto;
+    vertical-align: center;
+}
+
+.MessageFormVoiceMessage__action-container {
+    width: 300px;
+    min-height: 300px;
+}
+
+.MessageFormVoiceMessage__upload-audio-icon {
+    margin-bottom: 24px;
+}
+
+.MessageFormVoiceMessage__upload-audio-icon svg {
+    width: 60px;
+    height: 60px;
+    fill: var(--theme-color);
+    margin: 0 auto;
+    display: block;
+}
+
+.MessageFormVoiceMessage__upload-audio-select-file {
+    margin-bottom: 64px;
+}
+
+.MessageFormVoiceMessage__upload-audio-select-file input {
+    display: block;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.MessageFormVoiceMessage__upload-audio {
+    padding-top: 24px;
+}
+
+.MessageFormVoiceMessage .modal-title {
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.MessageFormVoiceMessage__record-audio {
+    padding-top: 8px;
+}
+
+.MessageFormVoiceMessage__record-audio-icon svg {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.MessageFormVoiceMessage__record-audio-icon svg {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+    fill: var(--theme-color);
+}
+
+.MessageFormVoiceMessage__record-audio-recording {
+    width: 80px;
+    height: 80px;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.MessageFormVoiceMessage__record-audio-icon-box {
+    height: 80px;
+}
+
+.MessageFormVoiceMessage__record-audio-button {
+    text-align: center;
+    height: 40px;
+}
+
+div.MessageFormVoiceMessage__record-audio-button .btn {
+    height: 42px !important;
+    pointer-events: none;
+    margin: 0 auto;
+    display: block;
+}
+
+.MessageFormVoiceMessage__record-audio-button-start {
+    cursor: pointer;
+}
+
+.faderecording .btn-close {
+    opacity: 0;
+    pointer-events: none;
+}

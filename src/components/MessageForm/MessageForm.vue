@@ -11,15 +11,14 @@
                   placeholder="Сообщение"></textarea>
 
         <div v-if="image.length < 1" class="MessageForm__box-message-attach dropdown">
-
-          <div class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <div title="Прикрепить изображение" class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
+               aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-paperclip"
                  viewBox="0 0 16 16">
               <path
                   d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0z"/>
             </svg>
           </div>
-
           <ul class="dropdown-menu">
             <li>
               <a class="dropdown-item" href="#">
@@ -30,8 +29,8 @@
               </a>
             </li>
           </ul>
-
         </div>
+        <MessageFormVoiceMessage/>
       </div>
       <div @click="sendMessage" :class="'MessageForm__box-send-button '+buttonDisabledClass">
         <div class="MessageForm__box-send-button-btn">
@@ -42,6 +41,7 @@
           </svg>
         </div>
       </div>
+
     </div>
 
   </form>
@@ -54,10 +54,12 @@ import MessagesApi from "@/api/MessagesApi";
 import MessageFormImagePreview
   from "@/components/MessageForm/components/MessageFormImagePreview/MessageFormImagePreview.vue";
 import ChatApi from "@/api/ChatApi";
+import MessageFormVoiceMessage
+  from "@/components/MessageForm/components/MessageFormVoiceMessage/MessageFormVoiceMessage.vue";
 
 export default defineComponent({
   name: 'MessageForm',
-  components: {MessageFormImagePreview},
+  components: {MessageFormVoiceMessage, MessageFormImagePreview},
   data() {
     return {
       message: '',
