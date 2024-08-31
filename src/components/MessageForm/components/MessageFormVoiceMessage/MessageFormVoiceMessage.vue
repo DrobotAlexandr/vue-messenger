@@ -40,23 +40,23 @@
         </li>
       </ul>
     </div>
-
-
     <div :class="'modal fade'+recordingClass" id="exampleModal" data-bs-backdrop="static" tabindex="-1"
          aria-labelledby="MessageFormVoiceMessageModal"
          aria-hidden="true">
       <div class="modal-dialog">
-
+        <div v-if="loader" class="MessageFormVoiceMessageModal__loader">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
         <div v-if="actionType === 'recordVoice'" class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="MessageFormVoiceMessageModal">Запись голосового сообщения</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"
+            <button ref="Close" type="button" class="btn-close" data-bs-dismiss="modal"
                     aria-label="Close"></button>
           </div>
           <div class="modal-body">
-
             <div class="MessageFormVoiceMessage__record-audio">
-
               <div class="MessageFormVoiceMessage__record-audio-icon-box">
                 <img v-if="recording" class="MessageFormVoiceMessage__record-audio-recording"
                      src="@/components/MessageForm/components/MessageFormVoiceMessage/img/recording.gif" alt="">
@@ -69,9 +69,7 @@
                   </svg>
                 </div>
               </div>
-
               <div class="MessageFormVoiceMessage__record-audio-button">
-
                 <div v-if="!recording" @click="startRecord" class="MessageFormVoiceMessage__record-audio-button-start">
                   <SubmitButton>
                     Начать запись
@@ -81,22 +79,17 @@
                      class="MessageFormVoiceMessage__record-audio-button-start">
                   <a href="">Завершить запись</a>
                 </div>
-
               </div>
-
             </div>
-
           </div>
         </div>
         <div v-if="actionType === 'uploadAudio'" class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="MessageFormVoiceMessageModal">Загрузка аудио-записи</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button ref="Close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-
             <div class="MessageFormVoiceMessage__upload-audio">
-
               <div class="MessageFormVoiceMessage__upload-audio-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-music-note-list" viewBox="0 0 16 16">
@@ -107,18 +100,16 @@
                         d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5m0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5m0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5"/>
                 </svg>
               </div>
-
               <div class="MessageFormVoiceMessage__upload-audio-select-file">
-                <input class="form-control MessageFormVoiceMessage__upload-audio-select-file-input" type="file"
-                       id="formFile">
+                <input v-if="!loader" @change="uploadAudioRecord"
+                       class="form-control MessageFormVoiceMessage__upload-audio-select-file-input"
+                       type="file"
+                       id="formFile"
+                       accept=".mp3">
               </div>
-
             </div>
-
-
           </div>
         </div>
-
       </div>
     </div>
 
@@ -128,6 +119,11 @@
 import {defineComponent} from 'vue';
 import '@/components/MessageForm/components/MessageFormVoiceMessage/MessageFormVoiceMessage.css';
 import SubmitButton from "@/components/Ui/SubmitButton/SubmitButton.vue";
+import AudioFilesApi from "@/api/AudioFilesApi";
+
+interface ComponentRefs {
+  Close: HTMLButtonElement;
+}
 
 export default defineComponent({
   name: 'MessageFormVoiceMessage',
@@ -138,7 +134,8 @@ export default defineComponent({
       actionType: '',
       recording: false,
       recordingDoneStopping: false,
-      recordingClass: ''
+      recordingClass: '',
+      loader: false
     }
   },
   methods: {
@@ -147,6 +144,12 @@ export default defineComponent({
       this.setRecording(false);
       this.setRecordingDoneStopping(false);
       this.setRecordingClass('');
+
+      const modal = document.getElementById('exampleModal');
+
+      if (modal) {
+        document.body.prepend(modal);
+      }
     },
     setRecording(recording: boolean) {
       this.recording = recording;
@@ -165,6 +168,52 @@ export default defineComponent({
       setTimeout(() => {
         this.setRecordingDoneStopping(true);
       }, 5000);
+
+    },
+    uploadAudioRecord: async function (event: any) {
+
+      this.loader = true;
+
+      const file = event.target.files[0];
+
+      if (file.size > 10485760) { // 10 MB
+        alert('Аудио-файл не должен быть более 10мб!');
+        return false;
+      }
+
+      let formData = new FormData();
+
+      const userId = localStorage.getItem('userId');
+
+      let chatId: any;
+      chatId = this.$route.params.chatId;
+
+      if (userId) {
+        formData.append('userId', userId);
+      }
+
+      if (chatId) {
+        formData.append('chatId', chatId);
+      }
+
+      formData.append('file', file);
+
+      const res = await AudioFilesApi.upload(formData);
+
+      if (res.status == 'error') {
+        alert(res.errorMessage);
+      } else {
+
+        const refs = this.$refs as unknown as ComponentRefs;
+
+        if (refs.Close) {
+          refs.Close.click();
+        }
+
+      }
+
+      this.loader = false;
+
 
     }
   }

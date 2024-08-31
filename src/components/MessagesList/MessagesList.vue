@@ -1,12 +1,13 @@
 <template>
   <div class="MessagesList">
-
     <div v-if="messages" class="MessagesList__items">
-
       <div v-for="message in messages" v-bind:key="message.id">
         <div :class="'MessagesList__item MessagesList__item_'+message.position">
-          <div class="MessagesList__item-message">
+          <div v-if="message.message" class="MessagesList__item-message">
             <span v-html="message.message"></span>
+          </div>
+          <div v-if="message.audio" class="MessagesList__item-audio">
+            <audio :src="message.audio" controls/>
           </div>
           <div class="MessagesList__item-meta">
           <span class="MessagesList__item-meta-time">
@@ -19,9 +20,7 @@
         </div>
         <div class="MessagesList__item-separator"></div>
       </div>
-
     </div>
-
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class BaseApi {
-    protected static async request(endpoint: string, data: object) {
+    protected static async request(endpoint: string, data: object, isFormData = false) {
 
         if (!axios.defaults.baseURL) {
             if (window.location.hostname === 'localhost') {
@@ -13,16 +13,36 @@ class BaseApi {
 
         const userId = localStorage.getItem('userId');
 
-        if (userId) {
-            data = {...data, userId};
+        let headers = {};
+
+        if (!isFormData) {
+
+            if (userId) {
+                data = {...data, userId};
+            }
+
+        } else {
+
+            headers = {
+                'Content-Type': 'multipart/form-data'
+            };
+
         }
 
         try {
-            const res = await axios.post(endpoint, data);
+
+            const res = await axios.post(endpoint, data,
+                {
+                    headers: headers
+                }
+            );
             return res.data;
+
         } catch (error) {
+
             console.error("API request error:", error);
             throw error;
+
         }
 
     }

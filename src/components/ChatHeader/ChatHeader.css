@@ -3,6 +3,7 @@
     width: 100vw;
     background: #fff;
     padding: 8px 8px 8px 20px;
+    z-index: 9;
 }
 
 .ChatHeader__user {

@@ -98,3 +98,15 @@ div.MessageFormVoiceMessage__record-audio-button .btn {
     opacity: 0;
     pointer-events: none;
 }
+
+.MessageFormVoiceMessageModal__loader {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    z-index: 99999999;
+    background: #ffffffeb;
+    text-align: center;
+    padding-top: 20%;
+    display: block;
+}
