@@ -77,7 +77,7 @@
                 </div>
                 <div v-if="recordingDoneStopping && recording"
                      class="MessageFormVoiceMessage__record-audio-button-start">
-                  <a href="">Завершить запись</a>
+                  <a @click="stopRecording" href="#">Завершить запись</a>
                 </div>
               </div>
             </div>
@@ -135,7 +135,9 @@ export default defineComponent({
       recording: false,
       recordingDoneStopping: false,
       recordingClass: '',
-      loader: false
+      loader: false,
+      audioChunks: [] as Blob[],
+      mediaRecorder: null as MediaRecorder | null
     }
   },
   methods: {
@@ -160,7 +162,7 @@ export default defineComponent({
     setRecordingDoneStopping(stopping: boolean) {
       this.recordingDoneStopping = stopping;
     },
-    startRecord() {
+    async startRecord() {
 
       this.setRecording(true);
       this.setRecordingClass('recording');
@@ -169,6 +171,69 @@ export default defineComponent({
         this.setRecordingDoneStopping(true);
       }, 5000);
 
+
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+
+        const stream = await navigator.mediaDevices.getUserMedia({audio: true});
+        this.mediaRecorder = new MediaRecorder(stream);
+
+        this.mediaRecorder.start();
+
+        this.mediaRecorder.ondataavailable = event => {
+          this.audioChunks.push(event.data);
+        };
+
+        this.mediaRecorder.onstop = async () => {
+          const audioBlob = new Blob(this.audioChunks, {type: 'audio/mp3'});
+
+          const formData = new FormData();
+
+          formData.append('file', audioBlob, 'recording.mp3');
+
+          const userId = localStorage.getItem('userId');
+
+          let chatId: any;
+          chatId = this.$route.params.chatId;
+
+          if (userId) {
+            formData.append('userId', userId);
+          }
+
+          if (chatId) {
+            formData.append('chatId', chatId);
+          }
+
+          const res = await AudioFilesApi.upload(formData);
+
+          if (res.status == 'error') {
+            alert(res.errorMessage);
+          } else {
+
+            const refs = this.$refs as unknown as ComponentRefs;
+
+            if (refs.Close) {
+              refs.Close.click();
+            }
+
+          }
+
+          this.loader = false;
+          this.recording=false;
+
+          this.audioChunks = [];
+
+        };
+
+      } else {
+        alert('Ваш браузер не поддерживает запись аудио.');
+      }
+
+    },
+    stopRecording() {
+      if (this.mediaRecorder) {
+        this.loader = true;
+        this.mediaRecorder.stop();
+      }
     },
     uploadAudioRecord: async function (event: any) {
 
