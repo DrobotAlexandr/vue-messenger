@@ -71,7 +71,7 @@
         <input @change="validateForm" value="1" v-model="form.privatePolicyConfirm" type="checkbox"
                class="LoginForm__item-confirm-controls-input" name="">
         <span>
-          Согласен с тем, как сервис <a :href="privatePolicyLink" target="_blank">обрабатывает мои данные</a> Мы обрабатываем ваши данные анонимно
+          Согласен с тем, как сервис <a :href="privatePolicyLink" target="_blank">обрабатывает мои данные</a>. Мы обрабатываем ваши данные анонимно.
         </span>
       </span>
     </label>
@@ -130,7 +130,7 @@ export default defineComponent({
   components: {LoginFormSuccessCheck, SubmitButton},
   data(): ComponentData {
     return {
-      privatePolicyLink: '/',
+      privatePolicyLink: '/pravovye-dokumenty',
       buttonLoading: false,
       form: {
         userName: '',

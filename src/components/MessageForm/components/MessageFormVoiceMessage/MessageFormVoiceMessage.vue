@@ -58,8 +58,9 @@
           <div class="modal-body">
             <div class="MessageFormVoiceMessage__record-audio">
               <div class="MessageFormVoiceMessage__record-audio-icon-box">
-                <img v-if="recording" class="MessageFormVoiceMessage__record-audio-recording"
-                     src="@/components/MessageForm/components/MessageFormVoiceMessage/img/recording.gif" alt="">
+                <div v-if="recording" class="MessageFormVoiceMessage__record-audio-recording">
+                  <Vue3Lottie :animation-data="recordingLottie" :height="80" :width="80"/>
+                </div>
                 <div v-else class="MessageFormVoiceMessage__record-audio-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                        class="bi bi-mic-fill" viewBox="0 0 16 16">
@@ -120,6 +121,8 @@ import {defineComponent} from 'vue';
 import '@/components/MessageForm/components/MessageFormVoiceMessage/MessageFormVoiceMessage.css';
 import SubmitButton from "@/components/Ui/SubmitButton/SubmitButton.vue";
 import AudioFilesApi from "@/api/AudioFilesApi";
+import {Vue3Lottie} from "vue3-lottie";
+import recordingLottie from '@/components/MessageForm/components/MessageFormVoiceMessage/lottie/recording.json';
 
 interface ComponentRefs {
   Close: HTMLButtonElement;
@@ -127,7 +130,7 @@ interface ComponentRefs {
 
 export default defineComponent({
   name: 'MessageFormVoiceMessage',
-  components: {SubmitButton},
+  components: {Vue3Lottie, SubmitButton},
   props: [],
   data: function () {
     return {
@@ -137,7 +140,8 @@ export default defineComponent({
       recordingClass: '',
       loader: false,
       audioChunks: [] as Blob[],
-      mediaRecorder: null as MediaRecorder | null
+      mediaRecorder: null as MediaRecorder | null,
+      recordingLottie: recordingLottie,
     }
   },
   methods: {
@@ -218,7 +222,7 @@ export default defineComponent({
           }
 
           this.loader = false;
-          this.recording=false;
+          this.recording = false;
 
           this.audioChunks = [];
 
