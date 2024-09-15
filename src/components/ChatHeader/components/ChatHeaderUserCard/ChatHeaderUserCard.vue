@@ -58,6 +58,20 @@
               </div>
             </div>
 
+            <div v-if="userRole==='psychologist'" class="ChatHeaderUserCard__re-change">
+
+              <div class="ChatHeaderUserCard__re-change-title">
+                Передать чат другому специалисту
+              </div>
+              <div class="ChatHeaderUserCard__re-change-text">
+                Чат будет передан в Канал заявок и его сможет взять другой специалист.
+              </div>
+
+              <div @click="reChange">
+                <SubmitButton>Передать</SubmitButton>
+              </div>
+            </div>
+
             <div v-if="userRole==='user' && user.bxUserId" class="ChatHeaderUserCard__thanks">
               <div class="ChatHeaderUserCard__thanks__title">
                 Вы можете отблагодарить психолога за консультацию на любую сумму
@@ -87,6 +101,7 @@ import '@/components/ChatHeader/components/ChatHeaderUserCard/ChatHeaderUserCard
 import UserAvatar from "@/components/UserAvatar/UserAvatar.vue";
 import SubmitButton from "@/components/Ui/SubmitButton/SubmitButton.vue";
 import {useUserStore} from "@/stores/UserStore";
+import ChatApi from "@/api/ChatApi";
 
 export default defineComponent({
   name: 'ChatHeaderUserCard',
@@ -102,5 +117,25 @@ export default defineComponent({
       userRole
     };
   },
+
+  methods: {
+    async reChange() {
+
+      if (!confirm('Вы действительно хотите передать Чат другому специалисту? Действие нельзя будет отменить.')) {
+        return;
+      }
+
+      const res = await ChatApi.reChange({chatId: this.$route.params.chatId});
+
+      if (res.status === 'ok') {
+        if (res.link) {
+          window.location.href = res.link;
+        }
+      } else {
+        alert('ServerError!');
+      }
+
+    }
+  }
 });
 </script>

@@ -44,3 +44,24 @@
 .ChatHeaderUserCard__thanks-form-item .btn {
     height: 38px;
 }
+
+.ChatHeaderUserCard__re-change-title {
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+.ChatHeaderUserCard__re-change-text {
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.ChatHeaderUserCard__re-change {
+    background: #eee;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.ChatHeaderUserCard__re-change button {
+    height: 40px !important;
+    min-width: fit-content !important;
+}
