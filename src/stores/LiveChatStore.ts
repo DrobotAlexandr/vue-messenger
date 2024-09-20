@@ -3,6 +3,7 @@ import {defineStore} from "pinia";
 interface LiveChatState {
     chats: object;
     messages: object;
+    editMessage: object;
 }
 
 export const useLiveChatStore = defineStore('liveChat', {
@@ -10,9 +11,16 @@ export const useLiveChatStore = defineStore('liveChat', {
         return {
             chats: [],
             messages: [],
+            editMessage: {}
         }
     },
     actions: {
+        setEditMessage(editMessage: object) {
+            this.editMessage = editMessage;
+        },
+        getEditMessage() {
+            return this.editMessage;
+        },
         setChats(chats: object): void {
             this.chats = chats;
         },

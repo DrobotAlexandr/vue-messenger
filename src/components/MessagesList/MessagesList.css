@@ -41,14 +41,15 @@
 .MessagesList__item-meta-time {
     font-size: 11px;
     color: green;
+    text-align: right;
 }
 
 .MessagesList__item-meta {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 16px;
     align-items: end;
     padding-left: 8px;
-    width: 60px;
+    width: 111px;
     float: right;
 }
 
@@ -58,9 +59,27 @@
 
 span.MessagesList__item-meta-status {
     margin-bottom: -3px;
+    text-align: right;
 }
 
 .MessagesList__item-message img {
     width: 100%;
     max-height: 400px;
+}
+
+.MessagesList__item-dropdown {
+    float: right;
+    margin-top: 0;
+    padding-right: 6px;
+}
+
+.MessagesList__item-dropdown-icon {
+    cursor: pointer;
+}
+
+.MessagesList__item-meta-is-edit span {
+    font-size: 11px;
+    padding-right: 4px;
+    padding-top: 0px;
+    display: block;
 }

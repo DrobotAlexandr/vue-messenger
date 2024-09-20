@@ -60,7 +60,7 @@
 
             <div v-if="userRole==='psychologist'" class="ChatHeaderUserCard__re-change">
 
-              <div class="ChatHeaderUserCard__re-change-title">
+              <div class="ChatHeaderUserCard__npm re-change-title">
                 Передать чат другому специалисту
               </div>
               <div class="ChatHeaderUserCard__re-change-text">

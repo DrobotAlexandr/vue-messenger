@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, ref, watch} from 'vue';
 import '@/components/MessageForm/MessageForm.css';
 import MessagesApi from "@/api/MessagesApi";
 import MessageFormImagePreview
@@ -56,16 +56,52 @@ import MessageFormImagePreview
 import ChatApi from "@/api/ChatApi";
 import MessageFormVoiceMessage
   from "@/components/MessageForm/components/MessageFormVoiceMessage/MessageFormVoiceMessage.vue";
+import {useLiveChatStore} from "@/stores/LiveChatStore";
+
+interface Message {
+  messageId: string;
+  message: string
+}
 
 export default defineComponent({
   name: 'MessageForm',
   components: {MessageFormVoiceMessage, MessageFormImagePreview},
   data() {
     return {
-      message: '',
       image: '',
       buttonDisabledClass: 'disabled'
     }
+  },
+  setup() {
+    const liveChatStore = useLiveChatStore();
+
+    const editMessage = ref<Message | null>(null);
+    const message = ref('');
+    const editMessageId = ref('');
+
+    const updateEditMessage = () => {
+      editMessage.value = liveChatStore.getEditMessage() as Message;
+    };
+
+    updateEditMessage();
+
+    watch(
+        () => liveChatStore.getEditMessage(),
+        (newValue) => {
+          editMessage.value = newValue as Message;
+          if (editMessage.value && editMessage.value.messageId) {
+            message.value = editMessage.value.message;
+            editMessageId.value = editMessage.value.messageId;
+          }
+        }
+    );
+
+    return {
+      liveChatStore,
+      editMessage,
+      message,
+      editMessageId
+    };
   },
   methods: {
     setImage(event: any) {
@@ -89,12 +125,14 @@ export default defineComponent({
       MessagesApi.sendMessage(
           {
             chatId: this.$route.params.chatId,
+            editMessageId: this.editMessageId,
             message: this.message,
             image: this.image
           }
       );
       this.message = '';
       this.image = '';
+      this.editMessageId = '';
     },
     validate() {
       if (this.message.length > 0 || this.image.length > 0) {
