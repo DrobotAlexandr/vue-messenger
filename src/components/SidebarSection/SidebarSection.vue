@@ -44,6 +44,11 @@
             <div class="SidebarSection__chats-item-context-message">
               <span v-html="chat.lastMessage.text"></span>
             </div>
+            <div class="SidebarSection__chats-item-context-new-messages">
+              <div v-if="chat.countNew" class="SidebarSection__chats-item-context-new-messages-count">
+                <span v-html="chat.countNew"></span>
+              </div>
+            </div>
           </div>
           <div class="SidebarSection__chats-item-helper">
             <div class="SidebarSection__chats-item-helper-read-status">

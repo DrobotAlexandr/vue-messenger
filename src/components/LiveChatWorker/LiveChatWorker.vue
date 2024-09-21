@@ -75,10 +75,35 @@ export default defineComponent({
         }, 1000);
       }
 
+      if (updates.countNew) {
+        if (updates.countNew.messages) {
+          this.sendAudionNotify(updates.countNew.messages);
+          this.sendTitleNotify(updates.countNew.messages);
+        }
+      }
+
       if (!query.length) {
         await this.getUpdates(updates.version, '');
       }
 
+    },
+    sendAudionNotify(countNewMessages: number) {
+      if (localStorage.getItem('countNewMessages') !== '' + countNewMessages + '') {
+        if (countNewMessages > 0) {
+          const audio = new Audio('/chat/Front-end/dist/audio/notify.mp3');
+          audio.play().catch(error => {
+            console.error('Ошибка при воспроизведении аудио:', error);
+          });
+          localStorage.setItem('countNewMessages', '' + countNewMessages + '');
+        }
+      }
+    },
+    sendTitleNotify(countNewMessages: number) {
+      if (countNewMessages > 0) {
+        document.title = '(' + countNewMessages + ')';
+      } else {
+        document.title = 'Онлайн-чат';
+      }
     },
     getCurrentChat(chats: any) {
       const chatIdToFind = this.$route.params.chatId;
@@ -89,5 +114,6 @@ export default defineComponent({
     }
   }
 
-});
+})
+;
 </script>
