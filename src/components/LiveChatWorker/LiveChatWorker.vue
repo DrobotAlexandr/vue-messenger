@@ -76,10 +76,8 @@ export default defineComponent({
       }
 
       if (updates.countNew) {
-        if (updates.countNew.messages) {
-          this.sendAudionNotify(updates.countNew.messages);
-          this.sendTitleNotify(updates.countNew.messages);
-        }
+        this.sendAudionNotify(updates.countNew.messages);
+        this.sendTitleNotify(updates.countNew.messages);
       }
 
       if (!query.length) {
