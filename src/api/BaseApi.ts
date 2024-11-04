@@ -5,7 +5,8 @@ class BaseApi {
 
         if (!axios.defaults.baseURL) {
             if (window.location.hostname === 'localhost') {
-                axios.defaults.baseURL = 'http://psyholog-gram.loc/chat/api';
+               // axios.defaults.baseURL = 'http://psyholog-gram.loc/chat/api';
+                axios.defaults.baseURL = 'https://psihologram.ru/chat/api';
             } else {
                 axios.defaults.baseURL = 'https://psihologram.ru/chat/api';
             }

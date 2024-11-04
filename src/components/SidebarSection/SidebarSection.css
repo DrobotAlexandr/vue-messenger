@@ -146,3 +146,20 @@
     text-align: center;
     padding-top: 1px;
 }
+
+.SidebarSection__back {
+    padding: 8px 20px 0 20px;
+    margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: 16px auto;
+    align-items: center;
+}
+
+.SidebarSection__back svg {
+    fill: var(--theme-color);
+}
+
+.SidebarSection__back a {
+    text-decoration: navajowhite;
+    color: var(--theme-color);
+}
