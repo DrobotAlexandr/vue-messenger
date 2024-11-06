@@ -26,6 +26,12 @@ const checkUser = async () => {
 
   const user = await UserApi.getUser(userId);
 
+  if (user.status === 'reAuthorize') {
+    localStorage.setItem('userId', '');
+    localStorage.setItem('chatId', '');
+    window.location.href = '';
+  }
+
   userStore.setUserRole(user.role);
 
   if (!user.id && router.currentRoute.value.name !== 'login') {
