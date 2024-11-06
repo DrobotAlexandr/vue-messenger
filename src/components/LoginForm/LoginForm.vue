@@ -55,7 +55,6 @@
       <span class="LoginForm__item-content">
         <select @change="validateForm" v-model="form.problemCategoryId"
                 class="form-control LoginForm__item-confirm-controls-input-text">
-          <option value="0">Что Вас беспокоит?</option>
           <option :value="category.id" v-for="category in problemsCategories" v-bind:key="category.id">{{
               category.title
             }}</option>
