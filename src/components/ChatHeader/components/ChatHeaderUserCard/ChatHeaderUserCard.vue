@@ -88,8 +88,7 @@
               </form>
             </div>
 
-
-            <div v-if="userRole==='user'" class="ChatHeaderUserCard__complaint">
+            <div v-if="userRole==='psychologist'" class="ChatHeaderUserCard__complaint">
               <div class="ChatHeaderUserCard__complaint_title">
                 Оставить жалобу
               </div>
