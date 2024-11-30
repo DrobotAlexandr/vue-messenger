@@ -71,6 +71,7 @@
     padding: 16px;
     border: 1px solid #ffa099;
     border-radius: 8px;
+    margin-top: 16px;
 }
 
 .ChatHeaderUserCard__complaint_title {
