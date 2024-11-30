@@ -88,6 +88,28 @@
               </form>
             </div>
 
+
+            <div v-if="userRole==='user'" class="ChatHeaderUserCard__complaint">
+              <div class="ChatHeaderUserCard__complaint_title">
+                Оставить жалобу
+              </div>
+
+              <form v-if="!complaintSuccessText" @submit.prevent="sendComplaintText()"
+                    :class="{'ChatHeaderUserCard__complaint_title-form' :true, 'ChatHeaderUserCard__complaint_title-form--load' : complaintLoader}">
+                <div class="ChatHeaderUserCard__complaint_title-form-item">
+                  <textarea v-model="complaintText"
+                            class="form-control ChatHeaderUserCard__complaint_title-form-textarea"></textarea>
+                </div>
+                <div class="ChatHeaderUserCard__complaint_button">
+                  <SubmitButton>Оставить жалобу</SubmitButton>
+                </div>
+              </form>
+              <div class="v-else">
+                <div v-html="complaintSuccessText"></div>
+              </div>
+
+            </div>
+
           </div>
         </div>
       </div>
@@ -96,7 +118,7 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent} from 'vue';
+import {computed, defineComponent, ref} from 'vue';
 import '@/components/ChatHeader/components/ChatHeaderUserCard/ChatHeaderUserCard.css';
 import UserAvatar from "@/components/UserAvatar/UserAvatar.vue";
 import SubmitButton from "@/components/Ui/SubmitButton/SubmitButton.vue";
@@ -110,15 +132,62 @@ export default defineComponent({
   setup() {
 
     const userStore = useUserStore();
+    const complaintText = ref('');
+    const complaintSuccessText = ref('');
+    const complaintLoader = ref(false);
 
     const userRole = computed(() => userStore.getUserRole());
 
     return {
-      userRole
+      userRole,
+      complaintText,
+      complaintSuccessText,
+      complaintLoader
     };
   },
 
   methods: {
+
+    async sendComplaintText() {
+
+      if (this.complaintText.length === 0) {
+        alert('Введите текст жалобы!');
+        return;
+      }
+
+      if (this.complaintText.length > 0 && this.complaintText.length < 100) {
+        alert('Текст жалобы должен быть минимум 100 символов! Сейчас ' + this.complaintText.length);
+        return;
+      }
+
+      if (this.complaintText.length > 500) {
+        alert('Текст жалобы должен быть максимум 500 символов! Сейчас ' + this.complaintText.length);
+        return;
+      }
+
+      this.complaintLoader = true;
+
+      const res = await ChatApi.sendComplaint(
+          {
+            chatId: this.$route.params.chatId,
+            complaintText: this.complaintText
+          }
+      );
+
+      if (res.status === 'ok') {
+        this.complaintSuccessText = 'Жалоба успешно отправлена! В ближайшее время мы ее рассмотрим!';
+      } else if (res.status === 'error') {
+        alert(res.errorMessage);
+        this.complaintSuccessText = res.errorMessage;
+      } else {
+        alert('[ChatApi.sendComplaint] : ServerError');
+      }
+
+      this.complaintLoader = false;
+
+
+    },
+
     async reChange() {
 
       if (!confirm('Вы действительно хотите передать Чат другому специалисту? Действие нельзя будет отменить.')) {

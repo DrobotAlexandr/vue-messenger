@@ -65,3 +65,31 @@
     height: 40px !important;
     min-width: fit-content !important;
 }
+
+.ChatHeaderUserCard__complaint {
+    background: #ffe9e9;
+    padding: 16px;
+    border: 1px solid #ffa099;
+    border-radius: 8px;
+}
+
+.ChatHeaderUserCard__complaint_title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.ChatHeaderUserCard__complaint_title-form-textarea {
+    margin-bottom: 16px;
+    min-height: 100px !important;
+}
+
+.ChatHeaderUserCard__complaint_button .btn {
+    height: 40px;
+    width: 100%;
+}
+
+.ChatHeaderUserCard__complaint_title-form--load {
+    pointer-events: none;
+    opacity: 0.4;
+}

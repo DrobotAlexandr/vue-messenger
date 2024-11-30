@@ -1,7 +1,7 @@
 <template>
   <form class="MessageForm">
 
-    <div class="MessageForm__box">
+    <div v-if="!isBlocked" class="MessageForm__box">
       <div class="MessageForm__box-message">
 
         <MessageFormImagePreview :image="image" @remove-image="removeImage"/>
@@ -43,12 +43,23 @@
       </div>
 
     </div>
+    <div v-else>
+      <div class="chatBlocked alert alert-danger">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban"
+             viewBox="0 0 16 16">
+          <path
+              d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+        </svg>
+        <span>Чат заблокирован!</span>
+      </div>
+    </div>
 
   </form>
 </template>
 
 <script lang="ts">
 import {defineComponent, ref, watch} from 'vue';
+import {useRoute} from 'vue-router';
 import '@/components/MessageForm/MessageForm.css';
 import MessagesApi from "@/api/MessagesApi";
 import MessageFormImagePreview
@@ -63,6 +74,11 @@ interface Message {
   message: string
 }
 
+interface Chat {
+  id: string;
+  message: string;
+}
+
 export default defineComponent({
   name: 'MessageForm',
   components: {MessageFormVoiceMessage, MessageFormImagePreview},
@@ -72,12 +88,13 @@ export default defineComponent({
       buttonDisabledClass: 'disabled'
     }
   },
-  setup() {
+  setup: function () {
     const liveChatStore = useLiveChatStore();
-
+    const route = useRoute();
     const editMessage = ref<Message | null>(null);
     const message = ref('');
     const editMessageId = ref('');
+    const isBlocked = ref(false);
 
     const updateEditMessage = () => {
       editMessage.value = liveChatStore.getEditMessage() as Message;
@@ -96,11 +113,23 @@ export default defineComponent({
         }
     );
 
+    watch(
+        () => liveChatStore.chats && route.params.chatId,
+        () => {
+          if (Array.isArray(liveChatStore.chats)) {
+            const foundChat = liveChatStore.chats.find((chat: Chat) => chat.id === route.params.chatId);
+            isBlocked.value = foundChat.isBlocked;
+          }
+        }
+    );
+
+
     return {
       liveChatStore,
       editMessage,
       message,
-      editMessageId
+      editMessageId,
+      isBlocked
     };
   },
   methods: {

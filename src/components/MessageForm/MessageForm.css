@@ -71,6 +71,12 @@
     pointer-events: none;
 }
 
+.chatBlocked {
+    display: grid;
+    grid-template-columns: 24px auto;
+    align-items: center;
+}
+
 @media screen and (max-width: 1500px) {
     .MessageForm {
         padding-left: 10%;
