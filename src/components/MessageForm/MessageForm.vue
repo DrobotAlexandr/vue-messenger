@@ -114,7 +114,17 @@ export default defineComponent({
     );
 
     watch(
-        () => liveChatStore.chats && route.params.chatId,
+        () => liveChatStore.chats,
+        () => {
+          if (Array.isArray(liveChatStore.chats)) {
+            const foundChat = liveChatStore.chats.find((chat: Chat) => chat.id === route.params.chatId);
+            isBlocked.value = foundChat.isBlocked;
+          }
+        }
+    );
+
+    watch(
+        () => route.params.chatId,
         () => {
           if (Array.isArray(liveChatStore.chats)) {
             const foundChat = liveChatStore.chats.find((chat: Chat) => chat.id === route.params.chatId);
