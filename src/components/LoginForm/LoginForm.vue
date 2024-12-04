@@ -17,11 +17,14 @@
                class="form-control LoginForm__item-confirm-controls-input-text"
                type="text"
                placeholder="Введите имя/никнейм"/>
+                <span class="LoginForm__item-error" v-if="!validate.userNameCheck && form.userName.length >= 2">
+          Введите корректно Имя! Имя должно быть на русском языке.
+        </span>
       </span>
     </label>
     <label v-if="ages" class="LoginForm__item">
       <span class="LoginForm__item-title">
-        Укажите ваш возраст <LoginFormSuccessCheck :is-check="validate.userAgeCheck"/>
+        Укажите ваш возраст
       </span>
       <span class="LoginForm__item-content">
         <select v-model="form.userAge" @change="validateForm" style="max-width: 110px;"
@@ -47,13 +50,12 @@
         </span>
       </span>
     </div>
-    <label v-if="problemsCategories" class="LoginForm__item LoginForm__item_big-margin">
+    <label v-if="problemsCategories" class="LoginForm__item">
       <span class="LoginForm__item-title">
-        Выберите категорию проблемы, которая вас беспокоит <LoginFormSuccessCheck
-          :is-check="validate.problemCategoryCheck"/>
+        Выберите категорию проблемы, которая вас беспокоит
       </span>
       <span class="LoginForm__item-content">
-        <select @change="validateForm" v-model="form.problemCategoryId"
+        <select @change="selectCategoryProblem()" v-model="form.problemCategoryId"
                 class="form-control LoginForm__item-confirm-controls-input-text">
           <option :value="category.id" v-for="category in problemsCategories" v-bind:key="category.id">{{
               category.title
@@ -61,11 +63,21 @@
         </select>
       </span>
     </label>
-    <label class="LoginForm__item-confirm">
-      <span class="LoginForm__item-confirm-title">
-        Психолог присоединится к чату в течение четырёх минут <LoginFormSuccessCheck
-          :is-check="validate.privatePolicyCheck"/>
+    <label class="LoginForm__item">
+      <span class="LoginForm__item-title">
+        Опишите вашу проблему
       </span>
+      <span class="LoginForm__item-content">
+        <textarea @input="validateForm" rows="5" ref="problemText" v-model="form.problemText"
+                  placeholder="Опишите кратко вашу проблему"
+                  class="form-control LoginForm__item-confirm-controls-input-text"></textarea>
+
+        <span class="LoginForm__item-error" v-if="!validate.problemTextCheck && form.problemText">
+          Описание проблемы должно быть не менее 150 символов и не более 500 символов!
+        </span>
+      </span>
+    </label>
+    <label class="LoginForm__item-confirm">
       <span class="LoginForm__item-confirm-controls">
         <input @change="validateForm" value="1" v-model="form.privatePolicyConfirm" type="checkbox"
                class="LoginForm__item-confirm-controls-input" name="">
@@ -94,7 +106,6 @@
 import {defineComponent} from 'vue';
 import '@/components/LoginForm/LoginForm.css';
 import SubmitButton from "@/components/Ui/SubmitButton/SubmitButton.vue";
-import LoginFormSuccessCheck from "@/components/LoginForm/components/LoginFormSuccessCheck.vue";
 import ChatApi from "@/api/ChatApi";
 import {useUserStore} from "@/stores/UserStore"
 
@@ -111,13 +122,15 @@ declare interface ComponentData {
     userAge: number,
     userGender: string,
     problemCategoryId: number,
-    privatePolicyConfirm: boolean
+    privatePolicyConfirm: boolean,
+    problemText: string
   },
   validate: {
     userNameCheck: boolean,
     userAgeCheck: boolean,
-    problemCategoryCheck: boolean
-    privatePolicyCheck: boolean
+    problemCategoryCheck: boolean,
+    privatePolicyCheck: boolean,
+    problemTextCheck: boolean
   },
   ages: object,
   disableSendButton: boolean,
@@ -126,7 +139,7 @@ declare interface ComponentData {
 
 export default defineComponent({
   name: 'LoginForm',
-  components: {LoginFormSuccessCheck, SubmitButton},
+  components: {SubmitButton},
   data(): ComponentData {
     return {
       privatePolicyLink: '/pravovye-dokumenty',
@@ -136,13 +149,15 @@ export default defineComponent({
         userAge: 0,
         userGender: 'man',
         problemCategoryId: 0,
-        privatePolicyConfirm: false
+        privatePolicyConfirm: false,
+        problemText: ''
       },
       validate: {
         userNameCheck: false,
         userAgeCheck: false,
         problemCategoryCheck: false,
-        privatePolicyCheck: false
+        privatePolicyCheck: false,
+        problemTextCheck: false
       },
       disableSendButton: true,
       ages: [
@@ -155,6 +170,19 @@ export default defineComponent({
     this.getProblemsCategories();
   },
   methods: {
+
+    selectCategoryProblem() {
+
+      this.validateForm();
+
+      const problemTextRef = this.$refs.problemText as HTMLInputElement | null;
+
+      if (problemTextRef) {
+        problemTextRef.focus();
+      }
+
+    },
+
     async getProblemsCategories() {
 
       const res = await ChatApi.getProblemsCategories();
@@ -164,7 +192,13 @@ export default defineComponent({
     },
     validateForm(): void {
 
-      this.validate.userNameCheck = this.form.userName.length >= 3;
+      this.validate.userNameCheck =
+          this.form.userName.length >= 3 &&
+          !this.form.userName.trim().includes(' ') &&
+          /^[а-яА-ЯёЁ]+$/.test(this.form.userName.trim());
+
+
+      this.validate.problemTextCheck = this.form.problemText.length >= 150 && this.form.problemText.length <= 600;
 
       this.validate.userAgeCheck = this.form.userAge > 1;
 
@@ -175,6 +209,8 @@ export default defineComponent({
       this.disableSendButton = !(this.validate.userNameCheck
           &&
           this.validate.userAgeCheck
+          &&
+          this.validate.problemTextCheck
           &&
           this.validate.problemCategoryCheck
           &&
@@ -190,7 +226,8 @@ export default defineComponent({
             name: this.form.userName,
             age: this.form.userAge,
             gender: this.form.userGender,
-            category: this.form.problemCategoryId
+            category: this.form.problemCategoryId,
+            problemText: this.form.problemText
           }
       );
 
