@@ -50,7 +50,10 @@
           <path
               d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
         </svg>
-        <span>Чат заблокирован!</span>
+        <span>
+          Чат заблокирован!
+          <div v-if="userRole==='psychologist'" @click="removeChat" class="chatBlocked__remove">Удалить чат</div>
+        </span>
       </div>
     </div>
 
@@ -58,7 +61,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, watch} from 'vue';
+import {computed, defineComponent, ref, watch} from 'vue';
 import {useRoute} from 'vue-router';
 import '@/components/MessageForm/MessageForm.css';
 import MessagesApi from "@/api/MessagesApi";
@@ -68,6 +71,7 @@ import ChatApi from "@/api/ChatApi";
 import MessageFormVoiceMessage
   from "@/components/MessageForm/components/MessageFormVoiceMessage/MessageFormVoiceMessage.vue";
 import {useLiveChatStore} from "@/stores/LiveChatStore";
+import {useUserStore} from "@/stores/UserStore";
 
 interface Message {
   messageId: string;
@@ -95,6 +99,9 @@ export default defineComponent({
     const message = ref('');
     const editMessageId = ref('');
     const isBlocked = ref(false);
+    const userStore = useUserStore();
+
+    const userRole = computed(() => userStore.getUserRole());
 
     const updateEditMessage = () => {
       editMessage.value = liveChatStore.getEditMessage() as Message;
@@ -139,10 +146,23 @@ export default defineComponent({
       editMessage,
       message,
       editMessageId,
-      isBlocked
+      isBlocked,
+      userRole
     };
   },
   methods: {
+
+    async removeChat() {
+      if (!confirm('Удалить чат?')) {
+        return;
+      }
+
+      await ChatApi.removeChat({chatId: this.$route.params.chatId});
+
+      window.location.href = '';
+
+    },
+
     setImage(event: any) {
       const file = event.target.files[0];
 

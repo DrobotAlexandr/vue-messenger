@@ -77,6 +77,12 @@
     align-items: center;
 }
 
+.chatBlocked__remove {
+    cursor: pointer;
+    color: #2196F3;
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 1500px) {
     .MessageForm {
         padding-left: 10%;

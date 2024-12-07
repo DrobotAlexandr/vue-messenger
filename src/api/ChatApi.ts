@@ -18,6 +18,10 @@ class ChatApi extends BaseApi {
         return await this.request('/chats/set-chat-typing', data);
     }
 
+    public static async removeChat(data: object) {
+        return await this.request('/chats/remove-chat', data);
+    }
+
     public static async readMessages(data: object) {
         return await this.request('/chats/read-messages', data);
     }
