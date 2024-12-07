@@ -2,7 +2,7 @@
   <form class="MessageForm">
 
     <div class="MessageForm__top">
-      <div v-if="userRole!=='psychologist'" class="MessageForm__set-contacts" @click="setContact">
+      <div v-if="userRole==='psychologist'" class="MessageForm__set-contacts" @click="setContact">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
              class="bi bi-person-lines-fill" viewBox="0 0 16 16">
           <path
