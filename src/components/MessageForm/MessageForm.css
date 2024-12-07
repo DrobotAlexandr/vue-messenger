@@ -83,6 +83,39 @@
     text-decoration: underline;
 }
 
+.MessageForm__set-contacts {
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.MessageForm__set-contacts {
+    padding-bottom: 8px;
+    cursor: pointer;
+    float: right;
+    margin-right: 90px;
+    color: #5d5fef;
+    font-size: 14px;
+}
+
+.MessageForm__top {
+    background: #f3f3ff;
+    height: 40px;
+    padding-top: 8px;
+}
+
+[data-bs-theme="dark"] .MessageForm__top {
+    background-color: var(--bg-dark);
+}
+
+/* mobile */
+
+@media screen and (max-width: 768px) {
+    .MessageForm__top {
+        margin-right: -36px;
+    }
+}
+
+
 @media screen and (max-width: 1500px) {
     .MessageForm {
         padding-left: 10%;

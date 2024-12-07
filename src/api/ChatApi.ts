@@ -35,6 +35,10 @@ class ChatApi extends BaseApi {
     }
 
 
+    public static async setContact(data: object) {
+        return await this.request('/chats/set-contact', data);
+    }
+
 
 }
 
