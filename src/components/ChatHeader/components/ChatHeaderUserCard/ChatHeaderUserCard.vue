@@ -63,7 +63,7 @@
               <div class="ChatHeaderUserCard__npm re-change-title">
                 Передать чат другому специалисту
               </div>
-              <div v-if="countTransfers < 3">
+              <div v-if="countTransfers < 4">
                 <div class="ChatHeaderUserCard__re-change-text">
                   Чат будет передан в Канал заявок и его сможет взять другой специалист.
                 </div>
