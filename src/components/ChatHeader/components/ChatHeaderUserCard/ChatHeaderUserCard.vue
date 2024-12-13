@@ -58,18 +58,25 @@
               </div>
             </div>
 
-            <div v-if="userRole==='psychologist'" class="ChatHeaderUserCard__re-change">
+            <div v-if="userRole=='psychologist'" class="ChatHeaderUserCard__re-change">
 
               <div class="ChatHeaderUserCard__npm re-change-title">
                 Передать чат другому специалисту
               </div>
-              <div class="ChatHeaderUserCard__re-change-text">
-                Чат будет передан в Канал заявок и его сможет взять другой специалист.
+              <div v-if="countTransfers < 3">
+                <div class="ChatHeaderUserCard__re-change-text">
+                  Чат будет передан в Канал заявок и его сможет взять другой специалист.
+                </div>
+                <div @click="reChange">
+                  <SubmitButton>Передать</SubmitButton>
+                </div>
+              </div>
+              <div v-else>
+                <div class="alert alert-danger mt-2" role="alert">
+                  Достигнуто максимально количество передач чата другому специалисту.
+                </div>
               </div>
 
-              <div @click="reChange">
-                <SubmitButton>Передать</SubmitButton>
-              </div>
             </div>
 
             <div v-if="userRole==='user' && user.bxUserId" class="ChatHeaderUserCard__thanks">
@@ -117,12 +124,19 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, ref} from 'vue';
+import {computed, defineComponent, ref, watch} from 'vue';
 import '@/components/ChatHeader/components/ChatHeaderUserCard/ChatHeaderUserCard.css';
 import UserAvatar from "@/components/UserAvatar/UserAvatar.vue";
 import SubmitButton from "@/components/Ui/SubmitButton/SubmitButton.vue";
 import {useUserStore} from "@/stores/UserStore";
 import ChatApi from "@/api/ChatApi";
+import {useLiveChatStore} from "@/stores/LiveChatStore";
+import {useRoute} from "vue-router";
+
+interface Chat {
+  id: string;
+  message: string;
+}
 
 export default defineComponent({
   name: 'ChatHeaderUserCard',
@@ -130,20 +144,45 @@ export default defineComponent({
   components: {SubmitButton, UserAvatar},
   setup() {
 
+    const liveChatStore = useLiveChatStore();
+    const route = useRoute();
     const userStore = useUserStore();
     const complaintText = ref('');
     const complaintSuccessText = ref('');
     const complaintLoader = ref(false);
+    const countTransfers = ref(0);
 
     const userRole = computed(() => userStore.getUserRole());
+
+    watch(
+        () => liveChatStore.chats,
+        () => {
+          if (Array.isArray(liveChatStore.chats)) {
+            const foundChat = liveChatStore.chats.find((chat: Chat) => chat.id === route.params.chatId);
+            countTransfers.value = foundChat.countTransfers;
+          }
+        }
+    );
+
+    watch(
+        () => route.params.chatId,
+        () => {
+          if (Array.isArray(liveChatStore.chats)) {
+            const foundChat = liveChatStore.chats.find((chat: Chat) => chat.id === route.params.chatId);
+            countTransfers.value = foundChat.countTransfers;
+          }
+        }
+    );
 
     return {
       userRole,
       complaintText,
       complaintSuccessText,
-      complaintLoader
+      complaintLoader,
+      countTransfers
     };
   },
+
 
   methods: {
 

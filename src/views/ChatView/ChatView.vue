@@ -32,6 +32,16 @@ export default defineComponent({
     const route = useRoute();
     const messages = ref([]);
 
+    function closeChatNotify() {
+      window.addEventListener('beforeunload', function (event) {
+        const message = 'Вы действительно хотите покинуть чат?';
+        event.returnValue = message;
+        return message;
+      });
+    }
+
+    closeChatNotify();
+
     const initializeChat = () => {
       const allMessages = computed(() => liveChatStore.getMessages());
 
