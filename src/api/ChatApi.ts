@@ -30,6 +30,10 @@ class ChatApi extends BaseApi {
         return await this.request('/chats/re-change-psychologist', data);
     }
 
+    public static async sendRating(data: object) {
+        return await this.request('/chats/send-rating', data);
+    }
+
     public static async sendComplaint(data: object) {
         return await this.request('/chats/send-complaint', data);
     }

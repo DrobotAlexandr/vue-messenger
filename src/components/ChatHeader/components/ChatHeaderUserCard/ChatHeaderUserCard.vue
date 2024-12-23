@@ -95,6 +95,105 @@
               </form>
             </div>
 
+            <div v-if="userRole==='user' && user.bxUserId" class="ChatHeaderUserCard__rating">
+
+              <div v-if="newRatingSuccess">
+                <div class="ChatHeaderUserCard__rating-success">
+                  Спасибо за оценку!
+                </div>
+              </div>
+              <div v-else>
+
+                <div class="ChatHeaderUserCard__rating-title">
+                  Оценить работу психолога
+                </div>
+                <div class="ChatHeaderUserCard__rating-stars">
+
+                  <div @click="setRating(1)" class="ChatHeaderUserCard__rating-star-item">
+                    <svg v-if="newRatingValue >= 1" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                         fill="currentColor"
+                         class="bi bi-star-fill ChatHeaderUserCard__rating-star-item-fill" viewBox="0 0 16 16">
+                      <path
+                          d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg v-else xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                         fill="currentColor" class="bi bi-star ChatHeaderUserCard__rating-star-item-blank"
+                         viewBox="0 0 16 16">
+                      <path
+                          d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+                    </svg>
+                  </div>
+                  <div @click="setRating(2)" class="ChatHeaderUserCard__rating-star-item">
+                    <svg v-if="newRatingValue >= 2" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                         fill="currentColor"
+                         class="bi bi-star-fill ChatHeaderUserCard__rating-star-item-fill" viewBox="0 0 16 16">
+                      <path
+                          d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg v-else xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                         fill="currentColor" class="bi bi-star ChatHeaderUserCard__rating-star-item-blank"
+                         viewBox="0 0 16 16">
+                      <path
+                          d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+                    </svg>
+                  </div>
+                  <div @click="setRating(3)" class="ChatHeaderUserCard__rating-star-item">
+                    <svg v-if="newRatingValue >= 3" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                         fill="currentColor"
+                         class="bi bi-star-fill ChatHeaderUserCard__rating-star-item-fill" viewBox="0 0 16 16">
+                      <path
+                          d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg v-else xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                         fill="currentColor" class="bi bi-star ChatHeaderUserCard__rating-star-item-blank"
+                         viewBox="0 0 16 16">
+                      <path
+                          d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+                    </svg>
+                  </div>
+                  <div @click="setRating(4)" class="ChatHeaderUserCard__rating-star-item">
+                    <svg v-if="newRatingValue >= 4" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                         fill="currentColor"
+                         class="bi bi-star-fill ChatHeaderUserCard__rating-star-item-fill" viewBox="0 0 16 16">
+                      <path
+                          d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg v-else xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                         fill="currentColor" class="bi bi-star ChatHeaderUserCard__rating-star-item-blank"
+                         viewBox="0 0 16 16">
+                      <path
+                          d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+                    </svg>
+                  </div>
+                  <div @click="setRating(5)" class="ChatHeaderUserCard__rating-star-item">
+                    <svg v-if="newRatingValue >= 5" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                         fill="currentColor"
+                         class="bi bi-star-fill ChatHeaderUserCard__rating-star-item-fill" viewBox="0 0 16 16">
+                      <path
+                          d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <svg v-else xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                         fill="currentColor" class="bi bi-star ChatHeaderUserCard__rating-star-item-blank"
+                         viewBox="0 0 16 16">
+                      <path
+                          d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <textarea v-model="newRatingComment"
+                          class="ChatHeaderUserCard__rating-comment form-control"
+                          placeholder="Комментарий"></textarea>
+
+                <div
+                    :class="{'ChatHeaderUserCard__rating-button' : true, 'ChatHeaderUserCard__rating-button--disabled' : newRatingValue === 0 || newRatingDisabled,}">
+                  <SubmitButton @click="sendRating">Оценить</SubmitButton>
+                </div>
+
+              </div>
+
+            </div>
+
             <div v-if="userRole==='psychologist'" class="ChatHeaderUserCard__complaint">
               <div class="ChatHeaderUserCard__complaint_title">
                 Оставить жалобу
@@ -151,6 +250,10 @@ export default defineComponent({
     const complaintSuccessText = ref('');
     const complaintLoader = ref(false);
     const countTransfers = ref(0);
+    const newRatingValue = ref(0);
+    const newRatingSuccess = ref(false);
+    const newRatingDisabled = ref(false);
+    const newRatingComment = ref('');
 
     const userRole = computed(() => userStore.getUserRole());
 
@@ -179,12 +282,20 @@ export default defineComponent({
       complaintText,
       complaintSuccessText,
       complaintLoader,
-      countTransfers
+      countTransfers,
+      newRatingValue,
+      newRatingSuccess,
+      newRatingComment,
+      newRatingDisabled
     };
   },
 
 
   methods: {
+
+    setRating(value: number) {
+      this.newRatingValue = value;
+    },
 
     async sendComplaintText() {
 
@@ -223,6 +334,30 @@ export default defineComponent({
 
       this.complaintLoader = false;
 
+
+    },
+
+    async sendRating() {
+
+      this.newRatingDisabled = true;
+
+      const res = await ChatApi.sendRating(
+          {
+            chatId: this.$route.params.chatId,
+            rating: this.newRatingValue,
+            comment: this.newRatingComment
+          }
+      );
+
+      if (res.status === 'ok') {
+        this.newRatingSuccess = true;
+      } else if (res.status === 'error') {
+        alert(res.errorMessage);
+      } else {
+        alert('ServerError!');
+      }
+
+      this.newRatingDisabled = false;
 
     },
 

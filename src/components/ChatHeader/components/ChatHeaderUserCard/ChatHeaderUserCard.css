@@ -94,3 +94,33 @@
     pointer-events: none;
     opacity: 0.4;
 }
+
+
+.ChatHeaderUserCard__rating-star-item {
+    cursor: pointer;
+}
+
+.ChatHeaderUserCard__rating-stars {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 120px;
+    margin-bottom: 8px;
+}
+
+.ChatHeaderUserCard__rating-star-item svg {
+    color: #ffcc00;
+}
+
+.ChatHeaderUserCard__rating-button .btn {
+    min-width: 108px;
+    height: 39px;
+}
+
+.ChatHeaderUserCard__rating-comment {
+    margin-bottom: 8px;
+}
+
+.ChatHeaderUserCard__rating-button--disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
