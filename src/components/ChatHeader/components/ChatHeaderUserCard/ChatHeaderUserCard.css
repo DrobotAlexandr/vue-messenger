@@ -124,3 +124,7 @@
     pointer-events: none;
     opacity: 0.4;
 }
+
+.ChatHeaderUserCard__rating {
+    padding: 20px;
+}
