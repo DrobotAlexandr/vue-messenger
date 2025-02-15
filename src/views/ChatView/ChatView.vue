@@ -14,6 +14,7 @@ import MessagesList from "@/components/MessagesList/MessagesList.vue";
 import ChatHeader from "@/components/ChatHeader/ChatHeader.vue";
 import {useLiveChatStore} from "@/stores/LiveChatStore";
 import ChatApi from "@/api/ChatApi";
+import {useUserStore} from "@/stores/UserStore";
 
 interface ChatMessage {
   id: string;
@@ -29,15 +30,22 @@ export default defineComponent({
   components: {ChatHeader, MessagesList},
   setup() {
     const liveChatStore = useLiveChatStore();
+    const userStore = useUserStore();
     const route = useRoute();
     const messages = ref([]);
 
     function closeChatNotify() {
+
+      if (userStore.getUserRole() !== 'user') {
+        return;
+      }
+
       window.addEventListener('beforeunload', function (event) {
         const message = 'Вы действительно хотите покинуть чат?';
         event.returnValue = message;
         return message;
       });
+
     }
 
     closeChatNotify();

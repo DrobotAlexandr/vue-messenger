@@ -1,6 +1,6 @@
 .MessageFormImagePreview {
     position: absolute;
-    left: 0;
+    right: 0;
     bottom: 78px;
     background: #dadaff;
     padding: 8px;
@@ -8,8 +8,8 @@
 }
 
 .MessageFormImagePreview__image {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     border-radius: 16px;
 }

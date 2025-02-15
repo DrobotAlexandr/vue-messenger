@@ -304,10 +304,12 @@ export default defineComponent({
         return;
       }
 
-      if (this.complaintText.length > 0 && this.complaintText.length < 100) {
-        alert('Текст жалобы должен быть минимум 100 символов! Сейчас ' + this.complaintText.length);
-        return;
-      }
+      /*
+        if (this.complaintText.length > 0 && this.complaintText.length < 100) {
+          alert('Текст жалобы должен быть минимум 100 символов! Сейчас ' + this.complaintText.length);
+          return;
+        }
+      */
 
       if (this.complaintText.length > 500) {
         alert('Текст жалобы должен быть максимум 500 символов! Сейчас ' + this.complaintText.length);

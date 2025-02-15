@@ -107,6 +107,15 @@
     background-color: var(--bg-dark);
 }
 
+.MessageForm__box-message-attach--active .dropdown-menu {
+    display: none !important;
+}
+
+.MessageForm__box-message-attach--active{
+    opacity: 0.2;
+    pointer-events: none;
+}
+
 /* mobile */
 
 @media screen and (max-width: 768px) {

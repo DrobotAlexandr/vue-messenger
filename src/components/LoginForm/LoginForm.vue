@@ -73,7 +73,7 @@
                   class="form-control LoginForm__item-confirm-controls-input-text"></textarea>
 
         <span class="LoginForm__item-error" v-if="!validate.problemTextCheck && form.problemText">
-          Описание проблемы должно быть не менее 150 символов и не более 500 символов!
+          Описание проблемы должно быть не менее 100 символов и не более 500 символов!
         </span>
       </span>
     </label>
@@ -142,7 +142,7 @@ export default defineComponent({
   components: {SubmitButton},
   data(): ComponentData {
     return {
-      privatePolicyLink: '/pravovye-dokumenty',
+      privatePolicyLink: '/pravovye-dokumenty/polzovatelskoe-soglashenie/',
       buttonLoading: false,
       form: {
         userName: '',
@@ -198,7 +198,7 @@ export default defineComponent({
           /^[а-яА-ЯёЁ]+$/.test(this.form.userName.trim());
 
 
-      this.validate.problemTextCheck = this.form.problemText.length >= 150 && this.form.problemText.length <= 600;
+      this.validate.problemTextCheck = this.form.problemText.length >= 100 && this.form.problemText.length <= 600;
 
       this.validate.userAgeCheck = this.form.userAge > 1;
 

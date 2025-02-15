@@ -3,7 +3,9 @@
     <div v-if="messages" class="MessagesList__items">
       <div v-for="message in messages" v-bind:key="message.id">
         <div :class="'MessagesList__item MessagesList__item_'+message.position">
-          <div v-if="message.self" class="MessagesList__item-dropdown dropdown">
+
+
+          <div v-if="message.self && message.type === 'text'" class="MessagesList__item-dropdown dropdown">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" data-bs-toggle="dropdown"
                  class="MessagesList__item-dropdown-icon dropdown-toggle bi bi-three-dots" viewBox="0 0 16 16">
               <path
@@ -11,10 +13,12 @@
             </svg>
             <ul class="dropdown-menu MessagesList__item-dropdown-menu">
               <li>
-                <a @click="setEditMessage(message.id, message.message)" class="dropdown-item" href="#">Редактировать</a>
+                <a v-if="message.type === 'text'" @click="setEditMessage(message.id, message.message)" class="dropdown-item" href="#">Редактировать</a>
               </li>
             </ul>
           </div>
+
+
           <div v-if="message.message" class="MessagesList__item-message">
             <span v-html="message.message"></span>
           </div>

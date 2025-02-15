@@ -24,7 +24,7 @@
                   class="MessageForm__box-message-textarea"
                   placeholder="Сообщение"></textarea>
 
-        <div v-if="image.length < 1" class="MessageForm__box-message-attach dropdown">
+        <div :class="{'MessageForm__box-message-attach' : true,'dropdown' : true, 'MessageForm__box-message-attach--active' : image.length >1 }">
           <div title="Прикрепить изображение" class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
                aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-paperclip"
