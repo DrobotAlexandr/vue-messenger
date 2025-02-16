@@ -62,6 +62,10 @@ span.MessagesList__item-meta-status {
     text-align: right;
 }
 
+.MessagesList__item-message {
+    overflow-x: hidden;
+}
+
 .MessagesList__item-message img {
     width: 100%;
     max-height: 400px;
