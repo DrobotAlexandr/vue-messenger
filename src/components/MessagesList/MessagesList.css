@@ -1,10 +1,8 @@
 .MessagesList__items {
     height: calc(100vh - 132px);
-    padding-top: 90px;
     overflow-y: auto;
-    padding-right: 8px;
-    padding-left: 30%;
     scroll-behavior: smooth;
+    padding: 90px 8px 40px 30%;
 }
 
 @media screen and (max-width: 1500px) {
