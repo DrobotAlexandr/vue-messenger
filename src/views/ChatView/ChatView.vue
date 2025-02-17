@@ -15,6 +15,7 @@ import ChatHeader from "@/components/ChatHeader/ChatHeader.vue";
 import {useLiveChatStore} from "@/stores/LiveChatStore";
 import ChatApi from "@/api/ChatApi";
 import {useUserStore} from "@/stores/UserStore";
+import './ChatView.scss';
 
 interface ChatMessage {
   id: string;
