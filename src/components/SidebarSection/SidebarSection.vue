@@ -12,7 +12,10 @@
           </span>
           <ul class="dropdown-menu">
             <li>
-              <a href="/" class="dropdown-item">Выход</a>
+              <a v-if="userRole === 'client'" onclick="return window.confirm('Вы действительно хотите выйти?')" href="/"
+                 class="dropdown-item">Выход</a>
+              <a v-else href="/"
+                 class="dropdown-item">Выход</a>
             </li>
           </ul>
         </div>
