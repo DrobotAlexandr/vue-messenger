@@ -3,6 +3,7 @@
     overflow-y: auto;
     scroll-behavior: smooth;
     padding: 90px 8px 40px 30%;
+    padding-bottom: 200px;
 }
 
 @media screen and (max-width: 1500px) {
