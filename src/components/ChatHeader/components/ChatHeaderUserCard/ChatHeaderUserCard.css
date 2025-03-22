@@ -128,3 +128,11 @@
 .ChatHeaderUserCard__rating {
     padding: 20px;
 }
+
+[data-bs-theme="dark"] .ChatHeaderUserCard__complaint {
+    background: transparent;
+}
+
+[data-bs-theme="dark"] .ChatHeaderUserCard__re-change {
+    background: transparent;
+}
