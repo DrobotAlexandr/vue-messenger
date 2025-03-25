@@ -20,11 +20,13 @@
 
         <MessageFormImagePreview :image="image" @remove-image="removeImage"/>
 
-        <textarea @change="setChatTyping" @click="setChatTyping" v-model="message" @input="validate"
+        <textarea @change="setChatTyping" @click="setChatTyping" v-model="message"
+                  @input="validate(); resizeTextArea();"
                   class="MessageForm__box-message-textarea"
                   placeholder="Сообщение"></textarea>
 
-        <div :class="{'MessageForm__box-message-attach' : true,'dropdown' : true, 'MessageForm__box-message-attach--active' : image.length >1 }">
+        <div
+            :class="{'MessageForm__box-message-attach' : true,'dropdown' : true, 'MessageForm__box-message-attach--active' : image.length >1 }">
           <div title="Прикрепить изображение" class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
                aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-paperclip"
@@ -123,6 +125,7 @@ export default defineComponent({
 
     updateEditMessage();
 
+
     watch(
         () => liveChatStore.getEditMessage(),
         (newValue) => {
@@ -214,6 +217,13 @@ export default defineComponent({
       this.message = '';
       this.image = '';
       this.editMessageId = '';
+      const element = document.querySelector<HTMLElement>('.MessageForm__box-message-textarea');
+      const chatItems = document.querySelector<HTMLElement>('.MessagesList__items');
+
+      if (element && chatItems) {
+        element.style.cssText = 'height: 66px';
+        chatItems.style.cssText = 'height: calc(100dvh - 132px) !important; padding-bottom: 50px;';
+      }
     },
     validate() {
       if (this.message.length > 0 || this.image.length > 0) {
@@ -222,6 +232,40 @@ export default defineComponent({
         this.buttonDisabledClass = 'disabled'
       }
     },
+
+    isMobile(): boolean {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobileUserAgent = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+      const isMobileViewport = window.innerWidth <= 768;
+      return isMobileUserAgent || isMobileViewport;
+    },
+
+    resizeTextArea() {
+      const element = document.querySelector<HTMLElement>('.MessageForm__box-message-textarea');
+      const chatItems = document.querySelector<HTMLElement>('.MessagesList__items');
+
+      if (element && chatItems) {
+
+        let height = 0;
+
+        if (this.isMobile()) {
+          height = element.offsetHeight;
+        } else {
+          height = element.offsetHeight + 50;
+        }
+
+        if (element.scrollHeight < 300) {
+          element.style.cssText = 'height:' + element.scrollHeight + 'px';
+          chatItems.style.cssText = 'height: calc(100dvh - ' + height + 'px) !important; padding-bottom: 130px;';
+        }
+
+        chatItems.scrollTo({
+          top: chatItems.scrollHeight,
+          behavior: 'smooth'
+        });
+      }
+    },
+
     removeImage() {
       this.image = '';
     },

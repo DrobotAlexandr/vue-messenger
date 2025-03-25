@@ -103,7 +103,15 @@
     padding-top: 8px;
 }
 
+.MessageForm {
+    background: #f3f3ff;
+}
+
 [data-bs-theme="dark"] .MessageForm__top {
+    background-color: var(--bg-dark);
+}
+
+[data-bs-theme="dark"]  .MessageForm {
     background-color: var(--bg-dark);
 }
 
