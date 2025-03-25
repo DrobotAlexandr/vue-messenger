@@ -22,7 +22,7 @@
 .ChatHeader__user-mobile {
     display: none;
     grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
+    align-items: start;
     font-size: 18px;
     font-weight: bold;
 }

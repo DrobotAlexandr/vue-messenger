@@ -26,6 +26,16 @@
         display: grid !important;
     }
 
+    .ChatHeader__user-back {
+        font-size: 14px !important;
+        margin-top: 4px !important;
+    }
+
+    .ChatHeader__user-back svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
     .messenger__view-container {
         padding: 0;
     }
@@ -64,7 +74,7 @@
     }
 
     .MessagesList__items {
-        height: calc(100vh - 90px) !important;
+        height: calc(100dvh - 90px) !important;
     }
 
     .MessagesList__items {
@@ -81,8 +91,8 @@
     }
 
     .MessagesList__items {
-        padding-top: 50px;
-        padding-bottom: 200px;
+        padding-top: 50px !important;
+        padding-bottom: 50px !important;
     }
 
 

@@ -5,7 +5,7 @@
         <UserAvatar :letter="user.letter"/>
         <div class="ChatHeader__user-name">
           {{ user.name }}
-          <LiveChatWorker/>
+          <LiveChatWorker v-if="!isMobile()"/>
         </div>
       </div>
       <div class="ChatHeader__user-mobile">
@@ -19,6 +19,7 @@
         </router-link>
         <div class="ChatHeader__user-mobile-name" data-bs-toggle="modal" data-bs-target="#userModal">
           {{ user.name }}
+          <LiveChatWorker v-if="isMobile()"/>
         </div>
         <div class="ChatHeader__user-mobile-avatar" data-bs-toggle="modal" data-bs-target="#userModal">
           <UserAvatar :letter="user.letter"/>
@@ -93,7 +94,12 @@ export default defineComponent({
 
       }
 
-
+    },
+    isMobile(): boolean {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobileUserAgent = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+      const isMobileViewport = window.innerWidth <= 768;
+      return isMobileUserAgent || isMobileViewport;
     }
   }
 });
